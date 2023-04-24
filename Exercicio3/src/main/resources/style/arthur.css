@@ -1,0 +1,67 @@
+.show_media {
+	max-width: 1310px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+    position: relative;
+}
+
+.esquerda {
+	width: 100%;
+    float: left;
+    margin-right: -300px;
+}
+
+.dentro {
+	margin-right: 300px;
+    padding-right: 50px;
+}
+
+.direita {
+	width: 300px;
+    float: right;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.like_buttons {
+	margin: 20px 0;
+    padding: 16px 0 14px;
+    border: 1px solid #eeeff2;
+    border-left: 0;
+    border-right: 0;
+}
+
+.pure-button {
+	display: inline-block;
+    padding: 0 15px;
+    width: 28%;
+    height: 28px;
+    line-height: 24px;
+    font-size: 13px;
+    max-width: 100px;
+}
+
+.bloco_texto_foto {
+	margin: 20px 0 10px;
+    padding: 10px 10px;
+    background: #f6f5fa;
+    line-height: 1.5;
+}
+
+.bloco_categorias {
+	margin-top: 30px;
+}
+
+.bloco_botao_contato {
+	margin-top: 30px;
+}
+
+.tag_categoria {
+	border: 1px solid blueviolet;
+	display: inline-block;
+    margin-top: 9px;
+    border-radius: 0.8em;
+    padding: 1px 8px;
+    font-size: 12px;
+    margin-top: 13px;
+}
