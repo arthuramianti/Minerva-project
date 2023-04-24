@@ -3,6 +3,7 @@
 }
 
 .cabecalho-principal {
+	display:flex;
 	padding: 30px;
 	background-color: #01011a;
 	height: 80px;
@@ -16,7 +17,10 @@
 	transform: translate(-50%, -50%);	
 }
 
-.titulo-principal{
+.titulo-div{
+	margin-top: 16px;
+}
+.titulo-principal {
 	color: white;
 }
 .nav-link{
@@ -26,13 +30,51 @@
 	padding-top: 60px;
 	padding-bottom: 60px;
 }
-
-.s-header{	
+.container-busca {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    color: #fff;
+    z-index: 9;
+}
+.ex{	
+	position: relative;
+	width: 100%;
 	background-image: url("C:\Users\Felipe\Desktop\Minerva-project-main\Exercicio3\src\main\resources\images\abstract-6047465_960_720.jpg");
-    height: 300px;
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
+}
+
+.background-busca {
+	text-align: center;
+	object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.div-busca {
+	position: inherit;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    min-height: 440px;
+    padding: 0 32px;
+}
+
+.content-div-busca {
+	width: 100%;
+    max-width: 840px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .s-01 {
@@ -75,119 +117,5 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.show_media {
-	max-width: 1310px;
-    margin: 32px auto 0;
-    padding: 0 20px;
-    position: relative;	
-}
-
-.esquerda {
-	width: 100%;
-    float: left;
-    margin-right: -300px;
-}
-
-.direita {
-	width: 300px;
-    float: right;
-    margin-bottom: 10px;
-    position: relative;
-}
-
-.dentro {
-	margin-right: 300px;
-    padding-right: 50px;
-}
-
-.foto_artista {
-	display: inline-block;
-}
-
-.like_buttons {
-	display: inline-block;
-    padding: 0 15px;
-    width: 28%;
-    height: 28px;
-    line-height: 24px;
-    font-size: 13px;
-    max-width: 100px;
-}
-
-.bloco_texto_foto {
-	margin:20px 0 10px;
-	background:#f6f5fa;
-	line-height:1.5
-}
-
-.bloco_categorias {
-	
-}
-
-.tag_categorias {
-	display: inline-block;
-    padding: 2px 10px;
-    margin: 0 0 8px 12px;
-    font-size: 13px;
-    color: #777;
-    border: 1px solid #cecece;
-    border-radius: 20px;
-    text-transform: lowercase;
-    transition: .2s;
-}
-
- 
 
 
