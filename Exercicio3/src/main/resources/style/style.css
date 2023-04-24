@@ -77,3 +77,117 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.show_media {
+	max-width: 1310px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+    position: relative;	
+}
+
+.esquerda {
+	width: 100%;
+    float: left;
+    margin-right: -300px;
+}
+
+.direita {
+	width: 300px;
+    float: right;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.dentro {
+	margin-right: 300px;
+    padding-right: 50px;
+}
+
+.foto_artista {
+	display: inline-block;
+}
+
+.like_buttons {
+	display: inline-block;
+    padding: 0 15px;
+    width: 28%;
+    height: 28px;
+    line-height: 24px;
+    font-size: 13px;
+    max-width: 100px;
+}
+
+.bloco_texto_foto {
+	margin:20px 0 10px;
+	background:#f6f5fa;
+	line-height:1.5
+}
+
+.bloco_categorias {
+	
+}
+
+.tag_categorias {
+	display: inline-block;
+    padding: 2px 10px;
+    margin: 0 0 8px 12px;
+    font-size: 13px;
+    color: #777;
+    border: 1px solid #cecece;
+    border-radius: 20px;
+    text-transform: lowercase;
+    transition: .2s;
+}
+
+ 
+
+
