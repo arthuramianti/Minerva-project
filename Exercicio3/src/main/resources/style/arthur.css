@@ -65,3 +65,27 @@
     font-size: 12px;
     margin-top: 13px;
 }
+
+.titulo_h4 {
+	margin-top: 15px;
+	padding: 10px 10px;
+}
+
+.foto_imagens_relacionadas {
+	width: 200px;
+	height: 100px;
+	float: left;
+    margin-left: 10px;
+    position: relative;
+}
+
+.foto_imagensrelacionadas {
+	width: 95%;
+    height: auto;
+}
+
+.bloco_form {
+	background-color: #c18de3;
+	border-radius: 1em;
+    padding: 17px 14px;
+}
