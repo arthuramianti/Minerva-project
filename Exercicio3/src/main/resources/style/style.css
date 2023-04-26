@@ -37,15 +37,10 @@
     color: #fff;
     z-index: 9;
 }
-.ex{	
-	position: relative;
-	width: 100%;
-	background-image: url("C:\Users\Felipe\Desktop\Minerva-project-main\Exercicio3\src\main\resources\images\abstract-6047465_960_720.jpg");
-    background-size: cover; 
-    background-position: center center; 
-    background-repeat: no-repeat; 
-}
 
+.busca {
+	display: flex;
+}
 .background-busca {
 	text-align: center;
 	object-fit: cover;
@@ -70,7 +65,6 @@
 }
 
 .content-div-busca {
-	width: 100%;
     max-width: 840px;
     display: flex;
     flex-direction: column;
@@ -80,7 +74,7 @@
 .s-01 {
 	padding-top: 8px;
 	padding-bottom: 100px;
-	background-color: #c0c0c0;
+	background-color: white;
 }
 
 .limite-site {
@@ -115,7 +109,35 @@
 	text-align: center;
 }
 
+.footer-principal {
+	background-color: #01011a;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}  
 
+.site-footer {
+	width: 100%;
+    max-width: 1830px;
+    padding: 64px 32px 56px;
+    display: flex;
+    align-items: flex-start;
+}
 
-
-
+.s-03 {
+    width: 100%;
+    display: flex;
+    padding-top: 8px;
+	padding-bottom: 100px;
+}
+.content-s-03 {
+	flex: auto; 
+}
+.titulo-s-03 {
+	font-size: 20px;
+	color: #0DCAF0;
+	font-weight: bold;
+	margin-top: 50px;
+}
