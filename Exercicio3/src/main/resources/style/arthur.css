@@ -65,3 +65,34 @@
     font-size: 12px;
     margin-top: 13px;
 }
+
+.circulo_foto_perfil {
+	width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: blue;
+    border-right-color: blue;
+    border-bottom-color: blue;
+    border-left-color: blue;
+}
+
+.imagem_perfil {
+	border-radius: 50%;
+}
+
+.bloco_nome_artista {
+	margin-bottom: 7px;
+}
+
+.bloco_status_artista {
+	margin-bottom: 15px;
+}
+
+.bloco_sobre_artista {
+	margin-bottom: 15px;
+}
+
+.bloco_contatos_artista {
+	margin-bottom: 15px;
+}
