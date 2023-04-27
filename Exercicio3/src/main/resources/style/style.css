@@ -1,3 +1,7 @@
+body {
+	font-family: math !important;
+}
+
 .cabecalho-container {
 	display: inline !important;
 }
@@ -162,6 +166,9 @@
     display: flex;
     flex-direction: column;
 }
-
+.a-footer {
+	color: #00ab6b;
+    text-decoration: none;
+}
 
 
