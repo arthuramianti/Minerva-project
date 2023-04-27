@@ -81,10 +81,6 @@
 	border-radius: 50%;
 }
 
-.bloco_nome_artista {
-	margin-bottom: 7px;
-}
-
 .bloco_status_artista {
 	margin-bottom: 15px;
 }
@@ -95,4 +91,35 @@
 
 .bloco_contatos_artista {
 	margin-bottom: 15px;
+}
+
+.galeria_fotos_perfil {
+	margin-top: 15px;
+}
+
+.bloco_form {
+	background-color: #9393f8;
+    padding: 25px;
+    border-radius: 2%;
+}
+
+.tag_cat {
+	border: 1px solid blue;
+    border-radius: 1em;
+    text-align: center;
+    margin-bottom: 14%;
+}
+
+.bloco_imagens_artista {
+	border-radius: 1em;
+}
+
+.secao_cadastro_usuario {
+	background-image: url(../images/fundoCdastro.webp);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.gradiante {
+	background: linear-gradient(0deg,rgba(25,27,38,.32),rgb(25 27 38 / 35%));
 }
