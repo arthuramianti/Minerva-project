@@ -5,11 +5,15 @@ import static spark.Spark.*;
 import service.ClienteService;
 
 public class Aplicacao {
+	
+	static ClienteService clienteService = new ClienteService();
 
 	public static void main(String[] args) {
 		port(6789);
 		
-		ClienteService clienteService = new ClienteService();
+		staticFiles.location("/");
+		
+		get("/", (request, response) -> clienteService.inicia(request, response));
 		
 		get("/todosClientes", (request, response) -> clienteService.get(request, response));
 		
