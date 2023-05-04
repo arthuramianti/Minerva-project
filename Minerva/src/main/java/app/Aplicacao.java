@@ -13,15 +13,15 @@ public class Aplicacao {
 		
 		staticFiles.location("/");
 		
-		get("/", (request, response) -> clienteService.inicia(request, response));
+		//Rotas normais do site
+		get("/", (request, response) -> clienteService.inicia(request, response));	
+		get("/cadastroUsuario", (request, response) -> clienteService.cadastroUsuario(request, response));
 		
-		get("/todosClientes", (request, response) -> clienteService.get(request, response));
-		
-		post("/consultaCliente", (request, response) -> clienteService.getClientById(request, response));
-		
-		post("/deletaCliente", (request, response) -> clienteService.deleteClientById(request, response));
-		
+		//Rotas de formulários
 		post("/cadastroCliente", (request, response) -> clienteService.insertClient(request, response));
+		get("/todosClientes", (request, response) -> clienteService.get(request, response));	
+		post("/consultaCliente", (request, response) -> clienteService.getClientById(request, response));	
+		post("/deletaCliente", (request, response) -> clienteService.deleteClientById(request, response));
 
 	}
 
