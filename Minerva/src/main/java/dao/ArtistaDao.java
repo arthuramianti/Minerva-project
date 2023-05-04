@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ClienteModel;
+import model.ArtistaModel;
 
-public class ClienteDao extends Dao {
+public class ArtistaDao extends Dao {
 
-	public ClienteDao() {
+	public ArtistaDao() {
 		super();
 		conectar();
 	}
@@ -17,7 +17,7 @@ public class ClienteDao extends Dao {
 		close();
 	}
 
-	public boolean insert(ClienteModel cliente) {
+	/*public boolean insert(ArtistaModel cliente) {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
@@ -30,27 +30,44 @@ public class ClienteDao extends Dao {
 			throw new RuntimeException(u);
 		}
 		return status;
-	}
+	}*/
 
-	public ClienteModel get(int idCliente) throws SQLException {
-		ClienteModel cliente = null;
+	public ArtistaModel get(int idArtista) throws SQLException {
+		ArtistaModel artista = null;
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente WHERE id_cliente=" + idCliente + ";";
+			String sql = "SELECT * FROM artista WHERE id_artista=" + idArtista + ";";
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
-				cliente = new ClienteModel(rs.getString("nome_cliente"), rs.getInt("id_cliente"),
-						rs.getString("email_cliente"), rs.getString("senha_cliente"), rs.getString("numero_cliente"));
+				artista = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
+						rs.getInt("idade_artista"), rs.getString("email_artista"), rs.getInt("fk_id_categoria"), rs.getString("resumo_descricao_artista"), this.getImagePathArtista(rs.getInt("fk_id_imagens")));
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return artista;
+	}
+	
+	public String getImagePathArtista(int fkIdImagem) {
+		String imagePath = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT path_imagens FROM imagens_artista WHERE id_imagens=" + fkIdImagem + ";";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				imagePath = rs.getString("path_imagens");
 			}
 			st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 
-		return cliente;
+		return imagePath;
 	}
 
-	public boolean update(ClienteModel cliente, int idCliente) {
+	/*public boolean update(ClienteModel cliente, int idCliente) {
 		boolean retorno = false;
 
 		try {
@@ -67,9 +84,9 @@ public class ClienteDao extends Dao {
 		}
 
 		return retorno;
-	}
+	}*/
 
-	public boolean delete(int idCliente) {
+	/*public boolean delete(int idCliente) {
 		boolean retorno = false;
 
 		try {
@@ -83,9 +100,9 @@ public class ClienteDao extends Dao {
 		}
 
 		return retorno;
-	}
+	}*/
 
-	public int getClientId(String nomeCliente) {
+	/*public int getClientId(String nomeCliente) {
 		int idClient = 0;
 
 		try {
@@ -100,28 +117,28 @@ public class ClienteDao extends Dao {
 			e.printStackTrace();
 		}
 		return idClient;
-	}
+	}*/
 
-	public List<ClienteModel> get() {
+	/*public List<ClienteModel> get() {
 		return getClients("");
-	}
+	}*/
 
-	public List<ClienteModel> getClients(String orderBy) {
-		List<ClienteModel> clients = new ArrayList<ClienteModel>();
+	public List<ArtistaModel> getArtistas(String orderBy) {
+		List<ArtistaModel> artistas = new ArrayList<ArtistaModel>();
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM cliente" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM artista" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
-				ClienteModel u = new ClienteModel(rs.getString("nome_cliente"), rs.getInt("id_cliente"),
-						rs.getString("email_cliente"), rs.getString("senha_cliente"), rs.getString("numero_cliente"));
-				clients.add(u);
+				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
+						rs.getInt("idade_artista"), rs.getString("email_artista"), rs.getInt("fk_id_categoria"), rs.getString("resumo_descricao_artista"), this.getImagePathArtista(rs.getInt("fk_id_imagens")));
+				artistas.add(u);
 			}
 			st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return clients;
+		return artistas;
 	}
 }

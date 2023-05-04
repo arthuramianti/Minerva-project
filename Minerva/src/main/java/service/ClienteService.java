@@ -1,21 +1,21 @@
 package service;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import dao.ClienteDao;
 import model.ClienteModel;
 import spark.Request;
 import spark.Response;
+import util.Util;
 
 public class ClienteService {
 	private ClienteDao clienteDao = new ClienteDao();
-
+	Util util = new Util();
+	
 	public ClienteService() {
-
+		
 	}
 
 	public Object get(Request request, Response response) {
@@ -77,31 +77,45 @@ public class ClienteService {
 
 	public Object insertClient(Request request, Response response) {
 		String front = "";
-		if (!request.queryParams("email_cliente").isEmpty() && !request.queryParams("nome_cliente").isEmpty()
-				&& !request.queryParams("idade_cliente").isEmpty()) {
-			ClienteModel cliente = new ClienteModel(request.queryParams("nome_cliente"),
-					Integer.parseInt(request.queryParams("idade_cliente")), request.queryParams("email_cliente"));
-			boolean retorno = clienteDao.insert(cliente);
-			front = retorno ? "<h1>Inserção feita com sucesso!</h1>"
-					: "<h1>Ocorreu um erro na inserção, tente novamente</h1>";
-		} else {
-			front = "<h1>O seu formulário está faltando algum campo, refaça o formulario por favor</h1>";
-		}
-		return front;
+		
+			if(!request.queryParams("nome_cliente").isEmpty() && !request.queryParams("email_cliente").isEmpty() && !request.queryParams("senha_cliente").isEmpty()) {
+				ClienteModel cliente = new ClienteModel(request.queryParams("nome_cliente"),
+						Integer.parseInt(request.queryParams("idade_cliente")), request.queryParams("email_cliente") , request.queryParams("senha_cliente"),
+						request.queryParams("numero_cliente"));
+				
+				response.status(201);
+				boolean retorno = clienteDao.insert(cliente);
+				
+				front = retorno ? "<h3>Inserção feita com sucesso!</h3>"
+						: "<h3>Ocorreu um erro na inserção, tente novamente</h3>";
+				
+			} else {
+				front = "<h3>Há campos faltantes no seu formulario faça novamente.</h3>";
+				response.status(404);
+			}
+			
+			String page = util.render("cadastroUsuario.html");
+			
+			page = page.replaceFirst("<form action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">", 
+					"<form style=\"display: none;\" action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">");
+			
+			page = page.replaceFirst("<div style=\"text-align: center; padding: 18px; display: none;\"><h4><RESULTFORM></h4></div>", 
+					"<div style=\"text-align: center; padding: 18px;\"><h4><RESULTFORM></h4></div>");
+			
+			page = page.replaceFirst("<RESULTFORM>", front);
+			
+		return page;
 	}
 
-	public Object inicia(Request request, Response response) {
-		String nomeArquivo = "src/main/resources/Front-end/index.html";
-		String retorno = "";
-		try {
-			Scanner entrada = new Scanner(new File(nomeArquivo));
-			while (entrada.hasNext()) {
-				retorno += (entrada.nextLine() + "\n");
-			}
-			entrada.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public Object inicia(Request request, Response response) throws SQLException {
+		String retorno = util.renderIndex();
+		
+		return retorno;
+	}
+	
+	public Object cadastroUsuario(Request request, Response response) {
+		String retorno = util.render("cadastroUsuario.html");
+		
 		return retorno;
 	}
 }
