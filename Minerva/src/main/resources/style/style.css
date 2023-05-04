@@ -171,4 +171,17 @@ body {
     text-decoration: none;
 }
 
+.secao_cadastro_artista {
+	background-image: url(../images/colorful.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.categorias_l1 {
+	padding-bottom: 30px;
+}
+.categorias_l2 {
+	padding-bottom: 30px;
+}
 
