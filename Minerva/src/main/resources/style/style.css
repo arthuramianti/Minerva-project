@@ -182,6 +182,87 @@ body {
 	padding-bottom: 30px;
 }
 .categorias_l2 {
-	padding-bottom: 30px;
+	padding-bottom: 100px;
 }
 
+.imagem_cliente {
+	padding: 5px 10px;
+    width: 48%;
+    background-color: #0B5ED7;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#arquivo {
+	display: none;
+}
+
+.img1_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/guitar-756326_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img2_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/man-505353_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img3_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/hands-1868562_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img4_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/tattoo-artist-556036_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img5_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/fire-6007111_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img6_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/pottery-1139047_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img7_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/guitar-4250161_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .img8_categoria {
+	width: 100%;
+    height: 178.94px;
+    background-image: url(../images/artist-4622221_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
