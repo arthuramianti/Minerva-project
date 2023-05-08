@@ -202,7 +202,7 @@ body {
 	display: none;
 }
 
-.img1_categoria {
+.img0_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/guitar-756326_960_720.jpg);
@@ -210,7 +210,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img2_categoria {
+  .img1_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/man-505353_960_720.jpg);
@@ -218,7 +218,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img3_categoria {
+  .img2_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/hands-1868562_1280.jpg);
@@ -226,7 +226,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img4_categoria {
+  .img3_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/tattoo-artist-556036_1280.jpg);
@@ -234,7 +234,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img5_categoria {
+  .img4_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/fire-6007111_1280.jpg);
@@ -242,7 +242,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img6_categoria {
+  .img5_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/pottery-1139047_1280.jpg);
@@ -250,7 +250,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img7_categoria {
+  .img6_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/guitar-4250161_1280.jpg);
@@ -258,7 +258,7 @@ body {
     background-size: cover;
     background-position: center center;
   }
-  .img8_categoria {
+  .img7_categoria {
 	width: 100%;
     height: 178.94px;
     background-image: url(../images/artist-4622221_960_720.jpg);
