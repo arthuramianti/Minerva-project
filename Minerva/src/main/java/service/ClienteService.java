@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.CategoriaDao;
 import dao.ClienteDao;
+import model.CategoriaModel;
 import model.ClienteModel;
 import spark.Request;
 import spark.Response;
@@ -120,7 +122,7 @@ public class ClienteService {
 	}
 	
 	public Object categoriasOverview(Request request, Response response) {
-		String retorno = util.render("categorias.html");
+		String retorno = util.renderCategorias();
 		
 		return retorno;
 	}
