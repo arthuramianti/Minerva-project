@@ -49,6 +49,7 @@ public class CategoriaDao extends Dao{
 			st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			
 		}
 		return categorias;
 	}
