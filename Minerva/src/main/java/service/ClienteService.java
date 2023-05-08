@@ -118,4 +118,10 @@ public class ClienteService {
 		
 		return retorno;
 	}
+	
+	public Object categoriasOverview(Request request, Response response) {
+		String retorno = util.render("categorias.html");
+		
+		return retorno;
+	}
 }

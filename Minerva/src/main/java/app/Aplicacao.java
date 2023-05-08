@@ -16,6 +16,7 @@ public class Aplicacao {
 		//Rotas normais do site
 		get("/", (request, response) -> clienteService.inicia(request, response));	
 		get("/cadastroUsuario", (request, response) -> clienteService.cadastroUsuario(request, response));
+		get("/categorias", (request, response) -> clienteService.categoriasOverview(request, response));
 		
 		//Rotas de formulários
 		post("/cadastroCliente", (request, response) -> clienteService.insertClient(request, response));

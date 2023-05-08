@@ -99,6 +99,7 @@ public class Util {
 				+ "   		<h2 class=\"h-principal\">Artistas principais</h2>";
 		
 		page += renderSectionOneIndex();
+		page += renderSectionTwoIndex();
 		
 		
 		
@@ -135,6 +136,16 @@ public class Util {
 			}
 		}
 		
+		sectionOne += "</div>\r\n"
+				+ "   </section> ";
+		
 		return sectionOne;
+	}
+	
+	public String renderSectionTwoIndex() {
+		String sectionTwo = "";
+		
+		
+		return null;
 	}
 }
