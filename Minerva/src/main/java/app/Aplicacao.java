@@ -9,7 +9,7 @@ public class Aplicacao {
 	static ClienteService clienteService = new ClienteService();
 
 	public static void main(String[] args) {
-		port(6789);
+		port(6780);
 		
 		staticFiles.location("/");
 		
