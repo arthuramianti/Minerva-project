@@ -27,19 +27,9 @@ body {
 .titulo-principal {
 	color: white;
 }
-
-.titulo-principal:hover {
-	color: #cccccc;
-}
-
 .nav-link{
 	color: white;
 }
-
-.nav-link:hover {
-	color: #cccccc;
-}
-
 .secao {
 	padding-top: 60px;
 	padding-bottom: 60px;
@@ -87,7 +77,7 @@ body {
 
 .s-01 {
 	padding-top: 8px;
-	padding-bottom: 42px;
+	padding-bottom: 100px;
 	background-color: white;
 }
 
@@ -281,17 +271,34 @@ body {
   	margin-top: 50px;
   }
   
-  .secao_categorias {
-  	background-color: #847f7f21;
-  	padding-top: 31px;
-    padding-bottom: 100px;
+  .h-categorias {
+  	text-align: center;
   }
   
-  .linha_categorias_home {
-  	margin-bottom: 40px;
+  .filtro-categorias {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  }
+  .botao-filtro {
+  	color: #01011a !important;
+  	border-color: #01011a !important;
+  	margin-right: 15px;
+  }
+   .botao-filtro-1:hover {
+  	background-color: #c7cce5 !important;
+  }
+  .dd-categorias{
+  	background-color: #01011a !important;
+  }
+  .div-categorias-especificas {
+  	margin-top: 20px;
+  	margin-bottom: 50px;
   }
   
-  .linha_artistas_home {
-  	margin-bottom: 40px;
+  .card{
+  	margin-top: 15px !important;
   }
-  
+  .card-categoria {
+  	
+  }
