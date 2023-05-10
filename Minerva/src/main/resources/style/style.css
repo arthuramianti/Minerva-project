@@ -302,3 +302,30 @@ body {
   .card-categoria {
   	
   }
+  .secao_crud_produto {
+  	background-image: url(../images/fundo-produtos.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .div_crud_produto {	
+  	background-color: #fff;
+  	margin-top: 50px;
+  	margin-bottom: 50px;
+  	padding-top: 50px;
+  	padding-bottom: 50px;
+  }
+  
+  .imagem_produto {
+	padding: 5px 10px;
+    width: 48%;
+    background-color: #0B5ED7;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  

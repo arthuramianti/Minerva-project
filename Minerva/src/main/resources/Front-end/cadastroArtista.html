@@ -54,60 +54,63 @@
 				<div class="col-4"></div>
 				<div class="col-4 bloco_form">
 				<h3 style="text-align: center;margin-bottom: 25px;margin-top: 16px;">Cadastre-se</h3>
-				<div style="text-align: center; padding: 18px; display: none;"><h4><RESULTFORM></h4></div>
-					<form action="http://localhost:6789/cadastrarArtista"  method="post" name="Formulario de cadastro de Artistas">
+					<form action="http://localhost:6789/cadastroCliente"  method="post" name="Formulario de cadastro de Clientes" target="_blank">
 						<div class="mb-3">
-							<label style="font-weight: 700;" for="nome_artista" class="form-label">Nome:</label>
-							<input type="text" class="form-control" id="nome_artista" name="nome_artista">
+							<label style="font-weight: 700;" for="nome_cliente" class="form-label">Nome:</label>
+							<input type="text" class="form-control" id="nome_cliente" name="nome_cliente" aria-describedby="emailHelp">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" for="email_artista" class="form-label">Email:</label> 
-							<input type="email" class="form-control" id="email_artista" name="email_artista">
+							<label style="font-weight: 700;" for="email_cliente" class="form-label">Email:</label> 
+							<input type="email" class="form-control" id="email_cliente" name="email_cliente" aria-describedby="emailHelp">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" for="cpf_artista" class="form-label">CPF:</label> 
-							<input type="text" class="form-control" id="cpf_artista" name="cpf_artista" aria-describedby="emailHelp">
+							<label style="font-weight: 700;" for="email_cliente" class="form-label">CPF:</label> 
+							<input type="email" class="form-control" id="email_cliente" name="email_cliente" aria-describedby="emailHelp">
 							<div id="emailHelp" class="form-text">Não compartilharemos seus dados pessoais</div>
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" for="senha_artista" class="form-label">Senha:</label>
-							<input type="password" class="form-control"	id="senha_artista" name="senha_artista">
+							<label style="font-weight: 700;" for="senha_cliente" class="form-label">Senha:</label>
+							<input type="password" class="form-control"	id="senha_cliente" name="senha_cliente">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" for="repete_senha_artista" class="form-label">Repita a senha:</label>
-							<input type="password" class="form-control"	id="repete_senha_artista" name="repete_senha_artista">
+							<label style="font-weight: 700;" for="repete_senha_cliente" class="form-label">Repita a senha:</label>
+							<input type="password" class="form-control"	id="repete_senha_cliente" name="repete_senha_cliente">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" class="form-label" for="numero_artista">Número de contato:</label>
-							<input type="tel" class="form-control" id="numero_artista" name="numero_artista">
+							<label style="font-weight: 700;" class="form-label" for="numero_cliente">Número de contato:</label>
+							<input type="tel" class="form-control" id="numero_cliente" name="numero_cliente">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" class="form-label" for="categoria_artista">Categoria:</label> 
-							<select class="form-select" aria-label="Default select example" id="categoria_artista" name="categoria_artista">
-									<option selected>Selecione sua categoria</option>
-									<option value="0">Música</option>
-									<option value="1">Tatuagem</option>
-									<option value="2">Pintor</option>
-									<option value="3">Animador de Festa</option>
-									<option value="4">Artesão</option>
-									<option value="5">Luthier</option>
-									<option value="6">Teatro</option>
-								</select>
+							<label style="font-weight: 700;" class="form-label" for="categoria_cliente">Categoria:</label>
+							<div class="dropdown">
+  								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    								Dropdown button
+  								</button>
+  									<ul class="dropdown-menu">
+    								<li><a class="dropdown-item" href="#">Action</a></li>
+    								<li><a class="dropdown-item" href="#">Another action</a></li>
+    								<li><a class="dropdown-item" href="#">Something else here</a></li>
+  								</ul>
 							</div>
-						<div class="mb-3">
-							<label style="font-weight: 700;" class="form-label" for="idade_artista">Idade:</label>
-							<input type="number" class="form-control" id="idade_artista" name="idade_artista">
 						</div>
-						<div>
+						<div class="mb-3">
+							<label style="font-weight: 700;" class="form-label" for="idade_cliente">Idade:</label>
+							<input type="number" class="form-control" id="idade_cliente" name="idade_cliente">
+						</div>
+						<div class="mb-3">
+							<label style="font-weight: 700;" class="form-label" for="endereco_cliente">Endereço comercial:</label>
+							<input type="number" class="form-control" id="idade_cliente" name="idade_cliente">
+						</div>
+						<div class="mb-3">
 							<label style="font-weight: 700;" class="form-label" for="img_label_cliente">Imagem:</label>
 							<label class = "imagem_cliente" for="arquivo">Enviar arquivo</label> 
-							<input type="file" name="arquivo" id="arquivo">
+							<input type="file"name="arquivo" id="arquivo">
 						</div>
 						<div class="mb-3">
-							<label style="font-weight: 700;" class="form-label" for="resumo_descicao_artista">Descrição:</label>
-							<input type="text" class="form-control" id="resumo_descicao_artista" name="resumo_descicao_artista">
+							<label style="font-weight: 700;" class="form-label" for="sobre_cliente">Sobre:</label>
+							<input type="text" class="form-control" id="idade_cliente" name="idade_cliente">
 						</div>
-						<button type="submit" class="btn btn-light" style="margin-top: 10px;">Enviar</button>
+						<button type="submit" class="btn btn-light" style="margin-top: 10px;">Submit</button>
 					</form>
 				</div>
 				<div class="col-4"></div>
