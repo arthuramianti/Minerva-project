@@ -11,6 +11,7 @@ import model.ArtistaModel;
 import model.CategoriaModel;
 
 public class Util {
+	
 	public String render(String nomeArquivo) {
 		String page = "";
 		try {

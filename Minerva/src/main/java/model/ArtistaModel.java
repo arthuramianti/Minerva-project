@@ -8,6 +8,9 @@ public class ArtistaModel {
 	private int fkIdCategoria;
 	private String resumoDescricaoArtista;
 	private String pathImages;
+	private String senhaArtista;
+	private String numeroArtista;
+	private String cpfArtista;
 	
 	public ArtistaModel() {
 		this.nomeArtista = "";
@@ -17,9 +20,12 @@ public class ArtistaModel {
 		this.fkIdCategoria = 0;
 		this.resumoDescricaoArtista = "";
 		this.pathImages = "";
+		this.senhaArtista = "";
+		this.numeroArtista = "";
+		this.cpfArtista = "";
 	}
 	
-	public ArtistaModel(String nomeArtista, int idArtista, int idadeArtista, String emailArtista, int fkIdCategoria, String resumoDescricaoArtista, String pathImages) {
+	public ArtistaModel(String nomeArtista, int idArtista, int idadeArtista, String emailArtista, String senhaArtista, int fkIdCategoria, String resumoDescricaoArtista, String pathImages, String numeroArtista, String cpfArtista) {
 		this.nomeArtista = nomeArtista;
 		this.idArtista = idArtista;
 		this.idadeArtista = idadeArtista;
@@ -27,6 +33,22 @@ public class ArtistaModel {
 		this.fkIdCategoria = fkIdCategoria;
 		this.resumoDescricaoArtista = resumoDescricaoArtista;
 		this.pathImages = pathImages;
+		this.senhaArtista = senhaArtista;
+		this.numeroArtista = numeroArtista;
+		this.cpfArtista = cpfArtista;
+	}
+	
+	public ArtistaModel(String nomeArtista, int idadeArtista, String emailArtista, String senhaArtista, String resumoDescricaoArtista, String pathImages, String numeroArtista, String cpfArtista, int fkIdCategoria) {
+		this.nomeArtista = nomeArtista;
+		this.idArtista = 0;
+		this.idadeArtista = idadeArtista;
+		this.emailArtista = emailArtista;
+		this.senhaArtista = senhaArtista;
+		this.fkIdCategoria = fkIdCategoria;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImages;
+		this.numeroArtista = numeroArtista;
+		this.cpfArtista = cpfArtista;
 	}
 	
 	public String getNomeArtista() {
@@ -89,5 +111,29 @@ public class ArtistaModel {
 
 	public void setPathImages(String pathImages) {
 		this.pathImages = pathImages;
+	}
+
+	public String getSenhaArtista() {
+		return senhaArtista;
+	}
+
+	public void setSenhaArtista(String senhaArtista) {
+		this.senhaArtista = senhaArtista;
+	}
+
+	public String getNumeroArtista() {
+		return numeroArtista;
+	}
+
+	public void setNumeroArtista(String numeroArtista) {
+		this.numeroArtista = numeroArtista;
+	}
+
+	public String getCpfArtista() {
+		return cpfArtista;
+	}
+
+	public void setCpfArtista(String cpfArtista) {
+		this.cpfArtista = cpfArtista;
 	}
 }

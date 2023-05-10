@@ -4,9 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.CategoriaDao;
 import dao.ClienteDao;
-import model.CategoriaModel;
 import model.ClienteModel;
 import spark.Request;
 import spark.Response;
@@ -108,22 +106,5 @@ public class ClienteService {
 			
 		return page;
 	}
-
-	public Object inicia(Request request, Response response) throws SQLException {
-		String retorno = util.renderIndex();
-		
-		return retorno;
-	}
 	
-	public Object cadastroUsuario(Request request, Response response) {
-		String retorno = util.render("cadastroUsuario.html");
-		
-		return retorno;
-	}
-	
-	public Object categoriasOverview(Request request, Response response) {
-		String retorno = util.renderCategorias();
-		
-		return retorno;
-	}
 }

@@ -17,12 +17,12 @@ public class ArtistaDao extends Dao {
 		close();
 	}
 
-	/*public boolean insert(ArtistaModel cliente) {
+	public boolean insert(ArtistaModel artista) {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			String sql = "INSERT INTO cliente (nome_cliente, idade_cliente, email_cliente, senha_cliente, numero_cliente) " + "VALUES ('"
-					+ cliente.getNomeCliente() + "'," + cliente.getIdade() + ", '" + cliente.getEmail() + "', '" + cliente.getSenha() + "', '" + cliente.getNumero() + "');";
+			String sql = "INSERT INTO artista (nome_artista, idade_artista, email_artista, senha_artista, numero_artista, resumo_descricao_artista, cpf_artista) " + "VALUES ('"
+					+ artista.getNomeArtista() + "'," + artista.getIdadeArtista() + ", '" + artista.getEmailArtista() + "', '" + artista.getSenhaArtista() + "', '" + artista.getNumeroArtista() + "', '" + artista.getResumoDescricaoArtista() + "', '" + artista.getCpfArtista() + "');";
 			st.executeUpdate(sql);
 			st.close();
 			status = true;
@@ -30,9 +30,9 @@ public class ArtistaDao extends Dao {
 			throw new RuntimeException(u);
 		}
 		return status;
-	}*/
+	}
 
-	public ArtistaModel get(int idArtista) throws SQLException {
+	/*public ArtistaModel get(int idArtista) throws SQLException {
 		ArtistaModel artista = null;
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -48,7 +48,7 @@ public class ArtistaDao extends Dao {
 		}
 		
 		return artista;
-	}
+	}*/
 	
 	public String getImagePathArtista(int fkIdImagem) {
 		String imagePath = null;
@@ -132,7 +132,7 @@ public class ArtistaDao extends Dao {
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
-						rs.getInt("idade_artista"), rs.getString("email_artista"), rs.getInt("fk_id_categoria"), rs.getString("resumo_descricao_artista"), this.getImagePathArtista(rs.getInt("fk_id_imagens")));
+						rs.getInt("idade_artista"), rs.getString("email_artista"), rs.getString("senha_artista"), rs.getInt("fk_id_categoria"), rs.getString("resumo_descricao_artista"), this.getImagePathArtista(rs.getInt("fk_id_imagens")), rs.getString("numero_artista"), rs.getString("cpf_artista"));
 				artistas.add(u);
 			}
 			st.close();
