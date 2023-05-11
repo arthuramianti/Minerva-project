@@ -128,7 +128,8 @@ public class ArtistaDao extends Dao {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM artista" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
+			String sql = "SELECT * FROM artista" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy) + " LIMIT 4;");
+			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
