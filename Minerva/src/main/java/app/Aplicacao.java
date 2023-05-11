@@ -29,7 +29,7 @@ public class Aplicacao {
 		post("/consultaCliente", (request, response) -> clienteService.getClientById(request, response));	
 		post("/deletaCliente", (request, response) -> clienteService.deleteClientById(request, response));
 		
-		//Artista
+		//Artista teste arthur
 		post("/cadastrarArtista", (request, response) -> artistaService.insertArtista(request, response));
 		
 		//post("/cadastrarArtista", (request, response) -> artistaService.cadastroArtista(request, response));
