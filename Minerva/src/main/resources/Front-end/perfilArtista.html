@@ -96,6 +96,43 @@
 											</svg>(31) 97129-8158</a>
 								</div>
 							</div>
+							<div class="row bloco_cadastro_produto">
+								<div class="col-12">
+									
+									<button type="button" class="btn btn-outline-primary" id ="btn-abre-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop"">Cadastrar novo produto</button>
+									<div class="modal fade" id="staticBackdrop"
+										data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+										aria-labelledby="staticBackdropLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastre um novo produto</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<div class="mb-3">
+															<label style="font-weight: 700;" class="form-label" for="titulo_produto">Título</label>
+															<input type="text" class="form-control" id="titulo_produto" name="titulo_produto" aria-describedby="emailHelp">
+														</div>
+														<div class="mb-3">
+															<label style="font-weight: 700;" class="form-label" for="img_label_produto">Imagem:</label>
+															<label class = "imagem_produto" for="arquivo">Enviar arquivo</label>
+															<input type="file"name="arquivo" id="arquivo">
+														</div>
+														<div class="mb-3">
+															<label style="font-weight: 700;" class="form-label" for="descricao_produto">Descrição:</label>
+															<textarea class="form-control" id="descricao_cliente" name="descricao_produto" rows="4"></textarea>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="margin-top: 10px;">Submit</button>
+													</div>
+											</div>
+										</div>
+									</div>		
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
