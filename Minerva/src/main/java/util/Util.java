@@ -64,7 +64,7 @@ public class Util {
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Home</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "      				<li class=\"nav-item\">\r\n"
-				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/cadastroUsuario\" href=\"#\">Cadastre-se</a>\r\n"
+				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/cadastroUsuario\">Cadastre-se</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "        			<li class=\"nav-item\">\r\n"
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/categorias\">Categorias</a>\r\n"
@@ -167,7 +167,7 @@ public class Util {
 					+ "  						<div class=\"img"+c.getIdCategoria()+"_categoria\"></div>\r\n"
 					+ " 						<div class=\"card-body\">\r\n"
 					+ " 					    	<h5 class=\"card-title\">" + c.getNomeCategoria() + "</h5>    						\r\n"
-					+ "    						<button type=\"button\" class=\"btn btn-outline-primary\">Mais</button>\r\n"
+					+ "    						<a href=\"categorias/"+c.getIdCategoria() +"\"><button type=\"button\" class=\"btn btn-outline-primary\">Mais</button></a>\r\n"
 					+ "				    	</div>\r\n"
 					+ "					</div>\r\n"
 					+ "   				</div>";
@@ -325,7 +325,7 @@ public class Util {
 					+ "  						<div class=\"img"+c.getIdCategoria()+"_categoria\"></div>\r\n"
 					+ " 						<div class=\"card-body\">\r\n"
 					+ " 					    	<h5 class=\"card-title\">" + c.getNomeCategoria() + "</h5>    						\r\n"
-					+ "    						<button type=\"button\" class=\"btn btn-outline-primary\">Mais</button>\r\n"
+					+ "    						<a href=\"categorias/"+c.getIdCategoria() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Mais</button></a>\r\n"
 					+ "				    	</div>\r\n"
 					+ "					</div>\r\n"
 					+ "   				</div>";

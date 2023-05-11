@@ -11,6 +11,7 @@ public class ArtistaModel {
 	private String senhaArtista;
 	private String numeroArtista;
 	private String cpfArtista;
+	private String nomeCategoria;
 	
 	public ArtistaModel() {
 		this.nomeArtista = "";
@@ -49,6 +50,14 @@ public class ArtistaModel {
 		this.pathImages = pathImages;
 		this.numeroArtista = numeroArtista;
 		this.cpfArtista = cpfArtista;
+	}
+	
+	public ArtistaModel(String nomeArtista, int idArtista, String resumoDescricaoArtista, String nomeCategoria, String pathImages) {
+		this.nomeArtista = nomeArtista;
+		this.idArtista = idArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImages;
+		this.nomeCategoria = nomeCategoria;
 	}
 	
 	public String getNomeArtista() {
@@ -135,5 +144,13 @@ public class ArtistaModel {
 
 	public void setCpfArtista(String cpfArtista) {
 		this.cpfArtista = cpfArtista;
+	}
+
+	public String getNomeCategoria() {
+		return nomeCategoria;
+	}
+
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
 	}
 }
