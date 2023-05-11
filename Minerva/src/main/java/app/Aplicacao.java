@@ -31,6 +31,7 @@ public class Aplicacao {
 		
 		//Artista
 		post("/cadastrarArtista", (request, response) -> artistaService.insertArtista(request, response));
+		
 		//post("/cadastrarArtista", (request, response) -> artistaService.cadastroArtista(request, response));
 		
 		
