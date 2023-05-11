@@ -141,4 +141,28 @@ public class ArtistaDao extends Dao {
 		}
 		return artistas;
 	}
+	
+	public List<ArtistaModel> getArtistasByCategoria(String fkIdCategoria) {
+		List<ArtistaModel> artistas = new ArrayList<ArtistaModel>();
+
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT nome_artista, id_artista, resumo_descricao_artista, nome_categoria, path_imagens\r\n"
+					+ "FROM artista\r\n"
+					+ "JOIN categorias\r\n"
+					+ "ON (categorias.id_categoria = "+fkIdCategoria+")\r\n"
+					+ "JOIN imagens_artista\r\n"
+					+ "ON (id_imagens = artista.fk_id_imagens)\r\n"
+					+ "WHERE fk_id_categoria = +"+fkIdCategoria+";";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"), rs.getString("resumo_descricao_artista"), rs.getString("nome_categoria"), rs.getString("path_imagens"));
+				artistas.add(u);
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return artistas;
+	}
 }
