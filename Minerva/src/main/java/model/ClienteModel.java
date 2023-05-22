@@ -25,15 +25,6 @@ public class ClienteModel {
 		this.numero = numero;
 		this.senha = senha;
 	}
-	
-	/*public ClienteModel(String nomeCliente, int id, int idade, String email, String senha, int numero) {
-		this.nomeCliente = nomeCliente;
-		this.idade = idade;
-		this.email = email;
-		this.id = id;
-		this.numero = numero;
-		this.senha = senha;
-	}*/
 
 	public String getNomeCliente() {
 		return nomeCliente;
