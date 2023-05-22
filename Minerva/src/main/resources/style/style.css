@@ -76,8 +76,8 @@ body {
 }
 
 .s-01 {
-	padding-top: 8px;
-	padding-bottom: 100px;
+	padding-top: 37px;
+	padding-bottom: 70px;
 	background-color: white;
 }
 
@@ -299,9 +299,13 @@ body {
   .card{
   	margin-top: 15px !important;
   }
-  .card-categoria {
-  	
-  }
+
+.secao_categorias {
+	background-color: #91789436;
+	padding-top: 34px;
+	padding-bottom: 48px;
+}
+
   .secao_crud_produto {
   	background-image: url(../images/fundo-produtos.jpg);
     background-repeat: no-repeat;
@@ -328,4 +332,38 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
+.botao_novo_produto {
+	display: flex;
+	justify-content: center;
+  	align-items: center;
+}
   
+.secao_categorias {
+	background-color: #cc00ff1f;
+    padding: 30px;
+}
+.linha_categorias_home {
+	margin-bottom: 20px;
+}
+.s-produtoArtista {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.foto-artista-pA {
+	height: 46px;
+	width: 46px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid blue;
+}
+.foto-artista-pA img {
+    width: 100%; 
+    height: auto; 
+}
+.nome-tag-produto {
+	display: block;
+}
+.tag_categoria {
+	display: inline !important;
+}
