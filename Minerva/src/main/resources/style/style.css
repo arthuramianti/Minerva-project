@@ -76,8 +76,8 @@ body {
 }
 
 .s-01 {
-	padding-top: 8px;
-	padding-bottom: 100px;
+	padding-top: 37px;
+	padding-bottom: 70px;
 	background-color: white;
 }
 
@@ -299,9 +299,13 @@ body {
   .card{
   	margin-top: 15px !important;
   }
-  .card-categoria {
-  	
-  }
+
+.secao_categorias {
+	background-color: #91789436;
+	padding-top: 34px;
+	padding-bottom: 48px;
+}
+
   .secao_crud_produto {
   	background-image: url(../images/fundo-produtos.jpg);
     background-repeat: no-repeat;
