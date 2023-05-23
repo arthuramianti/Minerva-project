@@ -12,6 +12,7 @@ public class ArtistaModel {
 	private String numeroArtista;
 	private String cpfArtista;
 	private String nomeCategoria;
+	private String nomeSubcategoria;
 	
 	public ArtistaModel() {
 		this.nomeArtista = "";
@@ -58,6 +59,13 @@ public class ArtistaModel {
 		this.resumoDescricaoArtista = resumoDescricaoArtista;
 		this.pathImages = pathImages;
 		this.nomeCategoria = nomeCategoria;
+	}
+	
+	public ArtistaModel(String nomeArtista, String resumoDescricaoArtista, String nomeSubcategoria, String pathImages) {
+		this.nomeArtista = nomeArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImages;
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 	
 	public String getNomeArtista() {
@@ -152,5 +160,13 @@ public class ArtistaModel {
 
 	public void setNomeCategoria(String nomeCategoria) {
 		this.nomeCategoria = nomeCategoria;
+	}
+
+	public String getNomeSubcategoria() {
+		return nomeSubcategoria;
+	}
+
+	public void setNomeSubcategoria(String nomeSubcategoria) {
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 }

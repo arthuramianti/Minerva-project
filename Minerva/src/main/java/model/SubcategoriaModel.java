@@ -26,6 +26,13 @@ public class SubcategoriaModel {
 		this.setNomeCategoria("");
 		this.setFkIdCategoria(0);
 	}
+	
+	public SubcategoriaModel(String nomeSubcategoria, int idSubcategoria) {
+		this.setNomeSubcategoria(nomeSubcategoria);
+		this.setIdSubcategoria(idSubcategoria);
+		this.setNomeCategoria("");
+		this.setFkIdCategoria(0);
+	}
 
 	public String getNomeSubcategoria() {
 		return nomeSubcategoria;
