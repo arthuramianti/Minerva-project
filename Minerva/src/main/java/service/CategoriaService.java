@@ -21,7 +21,8 @@ public class CategoriaService {
 	}
 	
 	public Object renderCategoriaEspecifica(Request request, Response response) {
-		CategoriaModel categoria = conexao.get(Integer.parseInt(request.params("id")));
+		int paramId = Integer.parseInt(request.params("id"));
+		CategoriaModel categoria = conexao.get(paramId);
 		ArtistaDao conexaoArtista = new ArtistaDao();
 		SubcategoriaDao conexaoSubcategoria = new SubcategoriaDao();
 		List<ArtistaModel> artistas = conexaoArtista.getArtistasByCategoria(request.params("id"));
@@ -88,11 +89,13 @@ public class CategoriaService {
 		
 		
 		for(SubcategoriaModel subcategoria: subcategorias) {
-			page += "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">"+subcategoria.getNomeSubcategoria()+"</button>\r\n";
+			page += "<a href="+paramId+ "/" + subcategoria.getNomeSubcategoria()+">";
+			page += "  			<button type=\"button\"onclick=\"adicionarValorNaURL();\" class=\"btn btn-outline-primary botao-filtro\">"+subcategoria.getNomeSubcategoria()+"</button>\r\n";
+			page += "</a>";
 		}
 		
 		page += "  		</div>";
-		
+
 		int auxiliar = 0;
 		
 		for(ArtistaModel artista: artistas) {
@@ -121,7 +124,8 @@ public class CategoriaService {
 		
 		page += "</div>\r\n"
 				+ "  </section>";
-		
+		page += "<div id=\"preenche\"></div>";
+		page += "<script src=\"../JS/js.js\"></script>";
 		
 		page += "<footer class=\"footer-principal\">\r\n"
 				+ "    	<div class=\"site-footer\">\r\n"
@@ -186,5 +190,10 @@ public class CategoriaService {
 				+ "</html>";
 		
 		return page;
+	}
+	
+	public Object atualizaPaginaCategoriaComSub(Request request, Response response) {
+		System.out.println(request.params("subcategoria"));
+		return "<h1>Entrei</h1>";
 	}
 }

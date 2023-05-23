@@ -38,6 +38,8 @@ public class Aplicacao {
 		
 		//Categoria
 		get("/categorias/:id", (request, response) -> categoriaService.renderCategoriaEspecifica(request, response));
+		get("/categorias/:id/:subcategoria", (request, response) -> categoriaService.atualizaPaginaCategoriaComSub(request, response));
+		
 		
 		
 
