@@ -4,8 +4,10 @@ import java.util.List;
 
 import dao.ArtistaDao;
 import dao.CategoriaDao;
+import dao.SubcategoriaDao;
 import model.ArtistaModel;
 import model.CategoriaModel;
+import model.SubcategoriaModel;
 import spark.Request;
 import spark.Response;
 import util.Util;
@@ -21,7 +23,9 @@ public class CategoriaService {
 	public Object renderCategoriaEspecifica(Request request, Response response) {
 		CategoriaModel categoria = conexao.get(Integer.parseInt(request.params("id")));
 		ArtistaDao conexaoArtista = new ArtistaDao();
+		SubcategoriaDao conexaoSubcategoria = new SubcategoriaDao();
 		List<ArtistaModel> artistas = conexaoArtista.getArtistasByCategoria(request.params("id"));
+		List<SubcategoriaModel> subcategorias = conexaoSubcategoria.getSubcategoriaNameByFK(request.params("id"));
 		
 		String page = "<!DOCTYPE html>\r\n"
 				+ "<html lang=\"pt-br\">\r\n"
@@ -80,15 +84,14 @@ public class CategoriaService {
 		
 		page += "<h2 class=\"h-principal h-categorias\" style=\"margin-top:100px;\">"+categoria.getNomeCategoria()+"</h2>\r\n"
 				+ "  		<div class=\"filtro-categorias\">\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Todos</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Rock</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Pop</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Hip-Hop</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Eletrônica</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Sertanejo</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Samba</button>\r\n"
-				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Variados</button>\r\n"
-				+ "  		</div>";
+				+ "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">Todos</button>\r\n";
+		
+		
+		for(SubcategoriaModel subcategoria: subcategorias) {
+			page += "  			<button type=\"button\" class=\"btn btn-outline-primary botao-filtro\">"+subcategoria.getNomeSubcategoria()+"</button>\r\n";
+		}
+		
+		page += "  		</div>";
 		
 		int auxiliar = 0;
 		
