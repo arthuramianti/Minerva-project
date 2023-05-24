@@ -367,3 +367,36 @@ body {
 .tag_categoria {
 	display: inline !important;
 }
+
+.descricao-sobre {
+	text-align: justify;
+}
+.titulo-sobre {
+	font-size: 40px;
+	color: #0DCAF0;
+	font-weight: bold;
+}
+.row-sobre {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.foto-equipe {
+	width: 60%;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #0DCAF0;
+    margin-top: 10px;
+    
+}
+.foto-equipe img {
+    width: 100%; 
+    height: auto; 
+}
+.card-sobre {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.equipe-sobre {
+	padding-bottom: 80px;
+}
