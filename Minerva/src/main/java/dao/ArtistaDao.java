@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ArtistaModel;
+import model.ImagensArtistaModel;
 
 public class ArtistaDao extends Dao {
 
@@ -32,15 +33,18 @@ public class ArtistaDao extends Dao {
 		return status;
 	}
 
-	/*public ArtistaModel get(int idArtista) throws SQLException {
+	public ArtistaModel get(int idArtista) throws SQLException {
 		ArtistaModel artista = null;
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM artista WHERE id_artista=" + idArtista + ";";
+			String sql = "SELECT nome_artista, resumo_descricao_artista, numero_artista, nome_categoria\r\n"
+					+ "FROM artista\r\n"
+					+ "JOIN categorias ON id_categoria = fk_id_categoria\r\n"
+					+ "WHERE id_artista = "+idArtista+";";
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
-				artista = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
-						rs.getInt("idade_artista"), rs.getString("email_artista"), rs.getInt("fk_id_categoria"), rs.getString("resumo_descricao_artista"), this.getImagePathArtista(rs.getInt("fk_id_imagens")));
+				artista = new ArtistaModel(rs.getString("nome_artista"), rs.getString("resumo_descricao_artista"),
+						rs.getString("numero_artista"), rs.getString("nome_categoria"));
 			}
 			st.close();
 		} catch (Exception e) {
@@ -48,7 +52,27 @@ public class ArtistaDao extends Dao {
 		}
 		
 		return artista;
-	}*/
+	}
+	
+	public List<ImagensArtistaModel> getImagensDoArtistaByIdArtista(int idArtista){
+		List<ImagensArtistaModel> imagens = new ArrayList<ImagensArtistaModel>();
+		
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT * FROM produtos_artista WHERE fk_id_artista = " + idArtista + ";";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				ImagensArtistaModel u = new ImagensArtistaModel(rs.getInt("id_produto"), rs.getString("path_imagem_produto"),
+						rs.getInt("fk_id_artista"));
+				imagens.add(u);
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return imagens;
+	}
 	
 	public String getImagePathArtista(int fkIdImagem) {
 		String imagePath = null;
@@ -129,7 +153,6 @@ public class ArtistaDao extends Dao {
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			String sql = "SELECT * FROM artista" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy) + " LIMIT 4;");
-			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getInt("id_artista"),
@@ -172,7 +195,7 @@ public class ArtistaDao extends Dao {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT nome_artista, resumo_descricao_artista, nome_subcategoria, path_imagens from artista\r\n"
+			String sql = "SELECT nome_artista, resumo_descricao_artista, nome_subcategoria, path_imagens, id_subcategoria from artista\r\n"
 					+ "JOIN categorias ON categorias.id_categoria = "+fkIdCategoria+"\r\n"
 					+ "JOIN subcategorias ON subcategorias.id_subcategoria = "+fkIdSubcategoria+"\r\n"
 					+ "JOIN imagens_artista\r\n"
@@ -180,7 +203,7 @@ public class ArtistaDao extends Dao {
 					+ "WHERE artista.fk_id_subcategoria = "+fkIdSubcategoria+";";
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
-				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getString("resumo_descricao_artista"), rs.getString("nome_subcategoria"), rs.getString("path_imagens"));
+				ArtistaModel u = new ArtistaModel(rs.getString("nome_artista"), rs.getString("resumo_descricao_artista"), rs.getString("nome_subcategoria"), rs.getString("path_imagens"), rs.getInt("id_subcategoria"));
 				artistas.add(u);
 			}
 			st.close();

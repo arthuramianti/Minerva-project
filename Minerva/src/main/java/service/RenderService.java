@@ -37,5 +37,10 @@ public class RenderService {
 		return retorno;
 	}
 	
+	public Object renderPerfilArtista(Request request, Response response) throws NumberFormatException, SQLException {
+		String retorno = util.renderPerfilArtistaCompleto(request.params("id"));
+		
+		return retorno;
+	}
 	
 }
