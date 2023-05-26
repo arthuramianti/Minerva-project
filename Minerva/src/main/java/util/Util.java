@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import dao.ArtistaDao;
 import dao.CategoriaDao;
+import dao.ProdutoArtistaDao;
 import model.ArtistaModel;
 import model.CategoriaModel;
 import model.ImagensArtistaModel;
@@ -135,7 +136,7 @@ public class Util {
 					+ " 						<div class=\"card-body\">\r\n"
 					+ " 					    	<h5 class=\"card-title\">" + a.getNomeArtista() + "</h5>\r\n"
 					+ "    						<p class=\"card-text\">" + a.getResumoDescricaoArtista() + "</p>\r\n"
-					+ "    						<a href=\"artista/" + a.getIdArtista() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Contrate</button></a>\r\n"
+					+ "    						<a href=\"artista/" + a.getIdArtista() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Perfil</button></a>\r\n"
 					+ "				    	</div>\r\n"
 					+ "					 </div>\r\n"
 					+ "   				</div>";
@@ -399,9 +400,11 @@ public class Util {
 			}
 			
 			paginaPerfil += "				<div class=\"col-4\">\r\n"
+					+ "<a href=http://localhost:6789/produto/"+i.getIdImagem()+">"
 			+ "					<div class=\"bloco_imagens_artista\">\r\n"
 			+ "						<img src=" + i.getImagem() + " class=\"img-fluid bloco_imagens_artista\" alt=\"...\">\r\n"
 			+ "					</div>\r\n"
+			+ " 			</a>	"
 			+ "				</div>\r\n";
 			
 			if(auxiliar == 3) {
@@ -418,5 +421,68 @@ public class Util {
 		paginaPerfil += this.renderFooter();
 		
 		return paginaPerfil;
+	}
+	
+	public String renderProdutoArtistaCompleto(String id) throws NumberFormatException, SQLException {
+		String paginaProduto = this.renderHeader();
+		ArtistaDao conexao = new ArtistaDao();
+		ProdutoArtistaDao conexaoProduto = new ProdutoArtistaDao();
+		ImagensArtistaModel produto = conexaoProduto.get(Integer.parseInt(id));
+		ArtistaModel artista = conexao.getInfoArtistaPaginaProduto(produto.getFkIdArtista());
+		
+		paginaProduto += "<section class=\"s-produtoArtista\">\r\n"
+				+ "      <div class=\"limite-site\">\r\n"
+				+ "		  <div class=\"row\">\r\n"
+				+ "			  <div class=\"img-produto col col-9\">\r\n"
+				+ "				  <img src="+produto.getImagem()+" width=\"830\">\r\n"
+				+ "			  </div>\r\n"
+				+ "			  <div class=\"produto-artista-content col col-3\">\r\n"
+				+ "			  	  <div class=\"row\">\r\n"
+				+ "			  	  	  <div class=\"col col-2\">\r\n"
+				+ "			  	  	  	  <div class=\"foto-artista-pA\">\r\n"
+				+ "				  	  	  	  <img src=\"..\\images\\eu.jpg\">\r\n"
+				+ "			  	  	  	  </div>\r\n"
+				+ "			  	  	  </div>\r\n"
+				+ "			  	  	  <div class=\"col col-10\">\r\n"
+				+ "					  	  <a class=\"nome-tag-produto\">"+artista.getNomeArtista()+"</a>\r\n"
+				+ "					  	  <div class=\"tag_categoria\">"+artista.getNomeCategoria()+"</div>\r\n"
+				+ "			  	  	  </div>\r\n"
+				+ "			  	  </div>\r\n"
+				+ "			  	  <div class=\"like_buttons\">\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-heart-fill\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path fill-rule=\"evenodd\" d=\"M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z\"/></svg>\r\n"
+				+ "						Curtir\r\n"
+				+ "					</button>\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-share\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path d=\"M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z\"/></svg>\r\n"
+				+ "						Compartilhar\r\n"
+				+ "					</button>\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg style=\"margin-bottom: 5px;\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-star-fill\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path d=\"M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z\"/></svg>\r\n"
+				+ "						Adicionar aos favoritos\r\n"
+				+ "					</button>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_texto_foto\">\r\n"
+				+ "					<div style=\"margin-top:4px;font-size:14px\">\r\n"
+				+ "						"+produto.getDescricaoProduto()+"\r\n"
+				+ "					</div>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_categorias\">\r\n"
+				+ "					<p style=\"font-weight: 400;\">Categorias do artista</p>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-primary btn-sm\">"+artista.getNomeCategoria()+"</button>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-primary btn-sm\">"+artista.getNomeSubcategoria()+"</button>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_botao_contato\">\r\n"
+				+ "					<p style=\"font-weight: 400;\">Entre em contato com o artista via WPP</p>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-success\">Contato</button>\r\n"
+				+ "				</div>\r\n"
+				+ "			  </div>\r\n"
+				+ "		  </div>\r\n"
+				+ "      </div>\r\n"
+				+ "  </section>";
+		
+		paginaProduto += this.renderFooter();
+		
+		return paginaProduto;
 	}
 }

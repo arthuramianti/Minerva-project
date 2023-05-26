@@ -90,6 +90,28 @@ public class ArtistaDao extends Dao {
 
 		return imagePath;
 	}
+	
+	public ArtistaModel getInfoArtistaPaginaProduto(int id) {
+		ArtistaModel artista = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT nome_artista, nome_categoria, nome_subcategoria\r\n"
+					+ "FROM artista\r\n"
+					+ "JOIN categorias ON id_categoria = artista.fk_id_categoria\r\n"
+					+ "JOIN subcategorias ON subcategorias.id_subcategoria = artista.fk_id_subcategoria\r\n"
+					+ "WHERE id_artista = " + id + ";";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				artista = new ArtistaModel(rs.getString("nome_artista"), rs.getString("nome_categoria"),
+						rs.getString("nome_subcategoria"));
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return artista;
+	}
 
 	/*public boolean update(ClienteModel cliente, int idCliente) {
 		boolean retorno = false;

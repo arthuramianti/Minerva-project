@@ -27,6 +27,12 @@ public class ArtistaModel {
 		this.cpfArtista = "";
 	}
 	
+	public ArtistaModel(String nomeArtista, String nomeCategoria, String nomeSubcategoria) {
+		this.nomeArtista = nomeArtista;
+		this.nomeCategoria = nomeCategoria;
+		this.nomeSubcategoria = nomeSubcategoria;
+	}
+	
 	public ArtistaModel(String nomeArtista, int idArtista, int idadeArtista, String emailArtista, String senhaArtista, int fkIdCategoria, String resumoDescricaoArtista, String pathImages, String numeroArtista, String cpfArtista) {
 		this.nomeArtista = nomeArtista;
 		this.idArtista = idArtista;
