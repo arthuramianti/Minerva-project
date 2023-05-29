@@ -406,3 +406,11 @@ body {
 .equipe-sobre {
 	padding-bottom: 80px;
 }
+
+.card-categoria {
+	border: solid 1px;
+    border-radius: 2em;
+    border-color: blue;
+    text-align: center;
+    width: 35%;
+}
