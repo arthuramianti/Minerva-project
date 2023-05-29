@@ -1,6 +1,9 @@
 package util;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -67,13 +70,13 @@ public class Util {
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Home</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "      				<li class=\"nav-item\">\r\n"
-				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/cadastroUsuario\">Cadastre-se</a>\r\n"
+				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Contatos</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "        			<li class=\"nav-item\">\r\n"
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/categorias\">Categorias</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "        			<li class=\"nav-item\">\r\n"
-				+ "          				<button type=\"button\" class=\"btn btn-outline-light\">Contatos</button>\r\n"
+				+ "                        <a class=\"btn btn-outline-light\" href=\"http://localhost:6789/cadastroUsuario\">Cadastre-se</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "      			</ul>\r\n"
 				+ "    		</div>\r\n"
@@ -97,9 +100,9 @@ public class Util {
 				+ "				<h1>Encontre o artista certo para você.</h1>\r\n"
 				+ "				<h6>São vários colaboradores de diferentes áreas da arte para lhe atender.</h6>\r\n"
 				+ "				<div class=\"busca\">\r\n"
-				+ "					<form class=\"d-flex my-2 my-lg-0\" style=\"min-width: 600px\">\r\n"
-				+ "						<input class=\"form-control me-2\" type=\"search\" placeholder=\"Pesquisar artistas\" aria-label=\"Pesquisar\">\r\n"
-				+ "						<button class=\"btn btn-outline-success\" type=\"submit\">Buscar</button>\r\n"
+				+ "					<form class=\"d-flex my-2 my-lg-0\" action=\"http://localhost:6789/buscaArtista\"  method=\"post\" style=\"min-width: 600px\">\r\n"
+				+ "						<input class=\"form-control me-2\" type=\"search\" name=\"chave_busca\" id=\"chave_busca\" placeholder=\"Pesquisar artistas\" aria-label=\"Pesquisar\">\r\n"
+				+ "						<button class=\"btn btn-success\" type=\"submit\">Buscar</button>\r\n"
 				+ "					</form>				\r\n"
 				+ "				</div>\r\n"
 				+ "			</div>\r\n"
@@ -123,6 +126,7 @@ public class Util {
 		String sectionOne = "";
 		ArtistaDao conexao = new ArtistaDao();
 		List<ArtistaModel> artistas = conexao.getArtistas("id_artista");
+		
 		int auxiliar = 0;
 		
 		for(ArtistaModel a: artistas) {
@@ -364,6 +368,7 @@ public class Util {
 				+ "													<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\"\r\n"
 				+ "														aria-label=\"Close\"></button>\r\n"
 				+ "													</div>\r\n"
+				+ "													<form action=\"/cadastroProduto\" name=\"Formulario de cadastro de produto\" method=\"post\">\r\n"
 				+ "													<div class=\"modal-body\">\r\n"
 				+ "														<div class=\"mb-3\">\r\n"
 				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"titulo_produto\">Título</label>\r\n"
@@ -372,7 +377,7 @@ public class Util {
 				+ "														<div class=\"mb-3\">\r\n"
 				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"img_label_produto\">Imagem:</label>\r\n"
 				+ "															<label class = \"imagem_produto\" for=\"arquivo\">Enviar arquivo</label>\r\n"
-				+ "															<input type=\"file\"name=\"arquivo\" id=\"arquivo\">\r\n"
+				+ "															<input type=\"file\" name=\"arquivoImagem\" id=\"arquivo\">\r\n"
 				+ "														</div>\r\n"
 				+ "														<div class=\"mb-3\">\r\n"
 				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"descricao_produto\">Descrição:</label>\r\n"
@@ -382,6 +387,7 @@ public class Util {
 				+ "													<div class=\"modal-footer\">\r\n"
 				+ "														<button type=\"submit\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" style=\"margin-top: 10px;\">Submit</button>\r\n"
 				+ "													</div>\r\n"
+				+ "                                                 </form>\r\n"	
 				+ "											</div>\r\n"
 				+ "										</div>\r\n"
 				+ "									</div>		\r\n"
@@ -484,5 +490,13 @@ public class Util {
 		paginaProduto += this.renderFooter();
 		
 		return paginaProduto;
+	}
+	
+	public String toMD5(String senha) throws NoSuchAlgorithmException {
+		MessageDigest m = MessageDigest.getInstance("MD5");
+		m.update(senha.getBytes(), 0, senha.length());
+		String md5 =  new BigInteger(1, m.digest()).toString(16);
+
+		return md5;
 	}
 }

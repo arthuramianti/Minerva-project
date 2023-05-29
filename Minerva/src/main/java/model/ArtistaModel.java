@@ -67,7 +67,8 @@ public class ArtistaModel {
 		this.nomeCategoria = nomeCategoria;
 	}
 	
-	public ArtistaModel(String nomeArtista, String resumoDescricaoArtista, String nomeSubcategoria, String pathImages, int fkIdCategoria) {
+	public ArtistaModel(int idArtista, String nomeArtista, String resumoDescricaoArtista, String nomeSubcategoria, String pathImages, int fkIdCategoria) {
+		this.idArtista = idArtista;
 		this.nomeArtista = nomeArtista;
 		this.resumoDescricaoArtista = resumoDescricaoArtista;
 		this.pathImages = pathImages;
@@ -79,6 +80,14 @@ public class ArtistaModel {
 		this.resumoDescricaoArtista = resumoDescricaoArtista;
 		this.nomeCategoria = nomeCategoria;
 		this.numeroArtista = numeroArtista;
+	}
+	
+	public ArtistaModel(String nomeArtista, int idArtista, String resumoDescricaoArtista, String nomeCategoria, String pathImagem, String nomeSubcategoria) {
+		this.nomeArtista = nomeArtista;
+		this.idArtista = idArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImagem;
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 	
 	public String getNomeArtista() {

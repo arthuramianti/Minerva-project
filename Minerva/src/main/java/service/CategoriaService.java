@@ -57,7 +57,7 @@ public class CategoriaService {
 					+ "  						<img src="+artista.getPathImages()+" class=\"card-img-top\" alt=\"...\">\r\n"
 					+ " 						<div class=\"card-body\">\r\n"
 					+ " 					    	<h5 class=\"card-title\">"+artista.getNomeArtista()+"</h5>\r\n"
-					+ " 							<p class=\"card-text card-categoria\">"+artista.getNomeCategoria()+"</p>\r\n"
+					+ " 							<p class=\"card-text card-categoria\">"+artista.getNomeSubcategoria()+"</p>\r\n"
 					+ "    						<p class=\"card-text\">"+artista.getResumoDescricaoArtista()+"</p>\r\n"
 					+ "    						<a href=\"http://localhost:6789/artista/"+ artista.getIdArtista() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Perfil</button></a>\r\n"
 					+ "				    	</div>\r\n"
@@ -211,27 +211,35 @@ public class CategoriaService {
 
 		int auxiliar = 0;
 		
-		for(ArtistaModel artista: artistas) {
-			if (auxiliar == 0) {
-				page += "<div class=\"row div-categorias-especificas\">";
-			}
-			String imgArtista = artista.getPathImages().replace("..\\", "http://localhost:6789/");
-			page += "<div class=\"col col-tiny-12 col-small-6 col-3 col-medium-3\">\r\n"
-					+ "   					<div class=\"card\">\r\n"
-					+ "  						<img src="+imgArtista+" class=\"card-img-top\" alt=\"...\">\r\n"
-					+ " 						<div class=\"card-body\">\r\n"
-					+ " 					    	<h5 class=\"card-title\">"+artista.getNomeArtista()+"</h5>\r\n"
-					+ " 							<p class=\"card-text card-categoria\">"+artista.getNomeSubcategoria()+"</p>\r\n"
-					+ "    						<p class=\"card-text\">"+artista.getResumoDescricaoArtista()+"</p>\r\n"
-					+ "    						<button type=\"button\" class=\"btn btn-outline-primary\">Contrate</button>\r\n"
-					+ "				    	</div>\r\n"
-					+ "					</div>\r\n"
-					+ "   			</div>";
-			
-			auxiliar++;
-			
-			if(auxiliar == 4) {
-				page += "</div>";
+		if (artistas.isEmpty()) {
+			page += "<div class=\"row div-categorias-especificas\">\r\n"
+					+ "<div class=\"col-12\">\r\n"
+					+ "<h2 class=\"h-principal h-categorias\" style=\"margin-top:100px;\">Ainda não temos artistas para esta subcategoria, aguarde por novidades</h2>"
+					+ "</div>"
+					+ "</div>";
+		} else {
+			for(ArtistaModel artista: artistas) {
+				if (auxiliar == 0) {
+					page += "<div class=\"row div-categorias-especificas\">";
+				}
+				String imgArtista = artista.getPathImages().replace("..\\", "http://localhost:6789/");
+				page += "<div class=\"col col-tiny-12 col-small-6 col-3 col-medium-3\">\r\n"
+						+ "   					<div class=\"card\">\r\n"
+						+ "  						<img src="+imgArtista+" class=\"card-img-top\" alt=\"...\">\r\n"
+						+ " 						<div class=\"card-body\">\r\n"
+						+ " 					    	<h5 class=\"card-title\">"+artista.getNomeArtista()+"</h5>\r\n"
+						+ " 							<p class=\"card-text card-categoria\">"+artista.getNomeSubcategoria()+"</p>\r\n"
+						+ "    						<p class=\"card-text\">"+artista.getResumoDescricaoArtista()+"</p>\r\n"
+						+ "                         <a href=\"http://localhost:6789/artista/"+ artista.getIdArtista() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Perfil</button></a>\r\n"
+						+ "				    	</div>\r\n"
+						+ "					</div>\r\n"
+						+ "   			</div>";
+				
+				auxiliar++;
+				
+				if(auxiliar == 4) {
+					page += "</div>";
+				}
 			}
 		}
 		

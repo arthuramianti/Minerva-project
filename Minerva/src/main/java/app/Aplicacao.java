@@ -42,6 +42,13 @@ public class Aplicacao {
 		get("/categorias/:id", (request, response) -> categoriaService.renderCategoriaEspecifica(request, response));
 		get("/categorias/:id/:subcategoria", (request, response) -> categoriaService.atualizaPaginaCategoriaComSub(request, response));
 		
+		//Busca principal
+		post("/buscaArtista", (request, response) -> artistaService.buscaArtista(request, response));
+		
+		//Produtos
+		post("/cadastroProduto", (request, response) -> artistaService.insertProduto(request, response));
+		
+		
 		
 		
 
