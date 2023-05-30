@@ -1,8 +1,16 @@
 package service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
 
 import dao.ArtistaDao;
 import model.ArtistaModel;
@@ -108,9 +116,15 @@ public class ArtistaService {
 		return page;
 	}
 	
-	public Object insertProduto(Request request, Response response) {
-		System.out.println("ll");
-		return "<h1>fodas</h1>";
+	public Object insertProduto(Request request, Response response) throws IOException, ServletException {
+		System.out.println(request.queryParams());
+		String imageName = request.queryParams("arquivo");
+		System.out.println(imageName);
+        String uploadPath = "imagens/" + "teste.jpg";
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+        InputStream input = request.raw().getPart("arquivo").getInputStream();
+        Files.copy(input, Paths.get(uploadPath), StandardCopyOption.REPLACE_EXISTING);
+        return "Imagem enviada com sucesso!";
 		
 	}
 	

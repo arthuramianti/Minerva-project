@@ -2,10 +2,20 @@ package app;
 
 import static spark.Spark.*;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+
+import javax.servlet.MultipartConfigElement;
+
+
 import service.ArtistaService;
 import service.CategoriaService;
 import service.ClienteService;
 import service.RenderService;
+import spark.Spark;
 
 public class Aplicacao {
 	
@@ -49,6 +59,16 @@ public class Aplicacao {
 		post("/cadastroProduto", (request, response) -> artistaService.insertProduto(request, response));
 		
 		
+		/*Spark.post("/cadastroProduto", "multipart/form-data", (request, response) -> {
+			String imageName = request.queryParams("arquivo");
+			System.out.println(imageName);
+            String uploadPath = "imagens/" + "teste.jpg";
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+            InputStream input = request.raw().getPart("arquivo").getInputStream();
+            Files.copy(input, Paths.get(uploadPath), StandardCopyOption.REPLACE_EXISTING);
+            
+            return "Imagem enviada com sucesso!";
+        });*/
 		
 		
 
