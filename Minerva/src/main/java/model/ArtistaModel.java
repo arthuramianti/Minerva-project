@@ -12,6 +12,7 @@ public class ArtistaModel {
 	private String numeroArtista;
 	private String cpfArtista;
 	private String nomeCategoria;
+	private String nomeSubcategoria;
 	
 	public ArtistaModel() {
 		this.nomeArtista = "";
@@ -24,6 +25,12 @@ public class ArtistaModel {
 		this.senhaArtista = "";
 		this.numeroArtista = "";
 		this.cpfArtista = "";
+	}
+	
+	public ArtistaModel(String nomeArtista, String nomeCategoria, String nomeSubcategoria) {
+		this.nomeArtista = nomeArtista;
+		this.nomeCategoria = nomeCategoria;
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 	
 	public ArtistaModel(String nomeArtista, int idArtista, int idadeArtista, String emailArtista, String senhaArtista, int fkIdCategoria, String resumoDescricaoArtista, String pathImages, String numeroArtista, String cpfArtista) {
@@ -58,6 +65,29 @@ public class ArtistaModel {
 		this.resumoDescricaoArtista = resumoDescricaoArtista;
 		this.pathImages = pathImages;
 		this.nomeCategoria = nomeCategoria;
+	}
+	
+	public ArtistaModel(int idArtista, String nomeArtista, String resumoDescricaoArtista, String nomeSubcategoria, String pathImages, int fkIdCategoria) {
+		this.idArtista = idArtista;
+		this.nomeArtista = nomeArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImages;
+		this.nomeSubcategoria = nomeSubcategoria;
+	}
+	
+	public ArtistaModel(String nomeArtista, String resumoDescricaoArtista, String numeroArtista, String nomeCategoria) {
+		this.nomeArtista = nomeArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.nomeCategoria = nomeCategoria;
+		this.numeroArtista = numeroArtista;
+	}
+	
+	public ArtistaModel(String nomeArtista, int idArtista, String resumoDescricaoArtista, String nomeCategoria, String pathImagem, String nomeSubcategoria) {
+		this.nomeArtista = nomeArtista;
+		this.idArtista = idArtista;
+		this.resumoDescricaoArtista = resumoDescricaoArtista;
+		this.pathImages = pathImagem;
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 	
 	public String getNomeArtista() {
@@ -152,5 +182,13 @@ public class ArtistaModel {
 
 	public void setNomeCategoria(String nomeCategoria) {
 		this.nomeCategoria = nomeCategoria;
+	}
+
+	public String getNomeSubcategoria() {
+		return nomeSubcategoria;
+	}
+
+	public void setNomeSubcategoria(String nomeSubcategoria) {
+		this.nomeSubcategoria = nomeSubcategoria;
 	}
 }

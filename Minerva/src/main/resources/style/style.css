@@ -27,8 +27,14 @@ body {
 .titulo-principal {
 	color: white;
 }
+.titulo-principal:hover {
+	color: #7b7bdc;
+}
 .nav-link{
 	color: white;
+}
+.nav-link:hover{
+	color: #7b7bdc;
 }
 .secao {
 	padding-top: 60px;
@@ -366,4 +372,45 @@ body {
 }
 .tag_categoria {
 	display: inline !important;
+}
+
+.descricao-sobre {
+	text-align: justify;
+}
+.titulo-sobre {
+	font-size: 40px;
+	color: #0DCAF0;
+	font-weight: bold;
+}
+.row-sobre {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.foto-equipe {
+	width: 60%;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #0DCAF0;
+    margin-top: 10px;
+    
+}
+.foto-equipe img {
+    width: 100%; 
+    height: auto; 
+}
+.card-sobre {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.equipe-sobre {
+	padding-bottom: 80px;
+}
+
+.card-categoria {
+	border: solid 1px;
+    border-radius: 2em;
+    border-color: blue;
+    text-align: center;
+    width: 35%;
 }

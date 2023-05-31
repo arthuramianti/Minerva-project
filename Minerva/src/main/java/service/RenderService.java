@@ -37,5 +37,21 @@ public class RenderService {
 		return retorno;
 	}
 	
+	public Object renderPerfilArtista(Request request, Response response) throws NumberFormatException, SQLException {
+		String retorno = util.renderPerfilArtistaCompleto(request.params("id"));
+		
+		return retorno;
+	}
 	
+	public Object renderProdutoArtista(Request request, Response response) throws NumberFormatException, SQLException {
+		String retorno = util.renderProdutoArtistaCompleto(request.params("id"));
+		
+		return retorno;
+	}
+	
+	public Object renderPaginaCadastroProduto(Request request, Response response) {
+		String retorno = util.render("cadastroProduto.html");
+		
+		return retorno;
+	}
 }

@@ -1,14 +1,19 @@
 package util;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 import dao.ArtistaDao;
 import dao.CategoriaDao;
+import dao.ProdutoArtistaDao;
 import model.ArtistaModel;
 import model.CategoriaModel;
+import model.ImagensArtistaModel;
 
 public class Util {
 	
@@ -27,8 +32,8 @@ public class Util {
 		return page;
 	}
 	
-	public String renderIndex() throws SQLException {
-		String page = "<!DOCTYPE html>\r\n"
+	public String renderHeader() {
+		String header = "<!DOCTYPE html>\r\n"
 				+ "<html lang=\"pt-br\">\r\n"
 				+ "<head>\r\n"
 				+ "  <meta charset=\"UTF-8\">\r\n"
@@ -40,6 +45,7 @@ public class Util {
 				+ "  <meta name=\"keywords\" content=\"musica, arte, artistas independentes\">\r\n"
 				+ "  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ\" crossorigin=\"anonymous\">\r\n"
 				+ "  <link rel=\"stylesheet\" href=\"../style\\style.css\">\r\n"
+				+ "  <link rel=\"stylesheet\" href=\"../style\\arthur.css\">\r\n"
 				+ "  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe\" crossorigin=\"anonymous\"></script>\r\n"
 				+ "</head>\r\n"
 				+ "<body>\r\n"
@@ -64,21 +70,28 @@ public class Util {
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Home</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "      				<li class=\"nav-item\">\r\n"
-				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/cadastroUsuario\">Cadastre-se</a>\r\n"
+				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Contatos</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "        			<li class=\"nav-item\">\r\n"
 				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789/categorias\">Categorias</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "        			<li class=\"nav-item\">\r\n"
-				+ "          				<button type=\"button\" class=\"btn btn-outline-light\">Contatos</button>\r\n"
+				+ "                        <a class=\"btn btn-outline-light\" href=\"http://localhost:6789/cadastroUsuario\">Cadastre-se</a>\r\n"
 				+ "        			</li>\r\n"
 				+ "      			</ul>\r\n"
 				+ "    		</div>\r\n"
 				+ "    	</div>\r\n"
 				+ "    </div>\r\n"
 				+ "    </div>\r\n"
-				+ "  </header>\r\n"
-				+ "	<div class=\"container-busca\">\r\n"
+				+ "  </header>\r\n";
+		
+		return header;
+	}
+	
+	public String renderIndex() throws SQLException {
+		String page = this.renderHeader();
+		
+		page	+= "	<div class=\"container-busca\">\r\n"
 				+ "		<div class=\"background-busca\">\r\n"
 				+ "			<img alt=\"\" src=\"../images/abstract-colorful-digital-art-wallpaper-1920x1080_48.jpg\">\r\n"
 				+ "		</div>	   \r\n"
@@ -87,9 +100,9 @@ public class Util {
 				+ "				<h1>Encontre o artista certo para você.</h1>\r\n"
 				+ "				<h6>São vários colaboradores de diferentes áreas da arte para lhe atender.</h6>\r\n"
 				+ "				<div class=\"busca\">\r\n"
-				+ "					<form class=\"d-flex my-2 my-lg-0\" style=\"min-width: 600px\">\r\n"
-				+ "						<input class=\"form-control me-2\" type=\"search\" placeholder=\"Pesquisar artistas\" aria-label=\"Pesquisar\">\r\n"
-				+ "						<button class=\"btn btn-outline-success\" type=\"submit\">Buscar</button>\r\n"
+				+ "					<form class=\"d-flex my-2 my-lg-0\" action=\"http://localhost:6789/buscaArtista\"  method=\"post\" style=\"min-width: 600px\">\r\n"
+				+ "						<input class=\"form-control me-2\" type=\"search\" name=\"chave_busca\" id=\"chave_busca\" placeholder=\"Pesquisar artistas\" aria-label=\"Pesquisar\">\r\n"
+				+ "						<button class=\"btn btn-success\" type=\"submit\">Buscar</button>\r\n"
 				+ "					</form>				\r\n"
 				+ "				</div>\r\n"
 				+ "			</div>\r\n"
@@ -103,9 +116,8 @@ public class Util {
 		
 		page += renderSectionOneIndex();
 		page += renderSectionTwoIndex();
+		page += "</main>";
 		page += renderFooter();
-		
-		
 		
 		return page;
 	}
@@ -114,6 +126,7 @@ public class Util {
 		String sectionOne = "";
 		ArtistaDao conexao = new ArtistaDao();
 		List<ArtistaModel> artistas = conexao.getArtistas("id_artista");
+		
 		int auxiliar = 0;
 		
 		for(ArtistaModel a: artistas) {
@@ -127,7 +140,7 @@ public class Util {
 					+ " 						<div class=\"card-body\">\r\n"
 					+ " 					    	<h5 class=\"card-title\">" + a.getNomeArtista() + "</h5>\r\n"
 					+ "    						<p class=\"card-text\">" + a.getResumoDescricaoArtista() + "</p>\r\n"
-					+ "    						<button type=\"button\" class=\"btn btn-outline-primary\">Contrate</button>\r\n"
+					+ "    						<a href=\"artista/" + a.getIdArtista() + "\"><button type=\"button\" class=\"btn btn-outline-primary\">Perfil</button></a>\r\n"
 					+ "				    	</div>\r\n"
 					+ "					 </div>\r\n"
 					+ "   				</div>";
@@ -188,8 +201,7 @@ public class Util {
 	}
 	
 	public String renderFooter() {
-		String footer = "</main>"
-				+ "<footer class=\"footer-principal\">\r\n"
+		String footer = "<footer class=\"footer-principal\">\r\n"
 				+ "    	<div class=\"site-footer\">\r\n"
 				+ "    		<div class=\"main-footer\">\r\n"
 				+ "	    		<a class=\"navbar-brand titulo-principal\" href=\"#\"><h1> Minerva </h1></a>\r\n"
@@ -247,7 +259,8 @@ public class Util {
 				+ "    	</div>	\r\n"
 				+ "	    <p style=\"color: white\">Copyright © 2023 - Minerva</p>\r\n"
 				+ "    </footer>\r\n"
-				+ "</body>";
+				+ "</body>"
+				+ "</html>";
 		
 		return footer;
 	}
@@ -257,59 +270,9 @@ public class Util {
 		CategoriaDao conexao = new CategoriaDao();
 		List<CategoriaModel> categorias = conexao.getCategorias("id_categoria");
 		
-		html += "<!DOCTYPE html>\r\n"
-				+ "<html lang=\"pt-br\">\r\n"
-				+ "<head>\r\n"
-				+ "  <meta charset=\"UTF-8\">\r\n"
-				+ "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-				+ "  <title>Minerva - Categorias</title>\r\n"
-				+ "  <meta name=\"description\" content=\"Página de busca de artistas independentes\">\r\n"
-				+ "  <link rel=\"canonical\" href=\"https://www.minerva.com\">\r\n"
-				+ "  <meta name=\"robots\" content=\"index, follow\">\r\n"
-				+ "  <meta name=\"keywords\" content=\"musica, arte, artistas independentes\">\r\n"
-				+ "  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ\" crossorigin=\"anonymous\">\r\n"
-				+ "  <link rel=\"stylesheet\" href=\"..\\style\\style.css\">\r\n"
-				+ "  <link rel=\"stylesheet\" href=\"..\\style\\arthur.css\">\r\n"
-				+ "  <link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\r\n"
-				+ "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\r\n"
-				+ "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n"
-				+ "  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe\" crossorigin=\"anonymous\"></script>\r\n"
-				+ "</head>\r\n"
-				+ "\r\n"
-				+ "<body>\r\n"
-				+ "    <header class=\"navbar navbar-expand-lg navbar-light cabecalho-principal\">\r\n"
-				+ "  	<div class=\"container cabecalho-container\">\r\n"
-				+ "  	<div class=\"row\">\r\n"
-				+ "  		<div class=\"col-3\">\r\n"
-				+ "  		<div class=\"titulo-div centralizar-div\">\r\n"
-				+ "    		<a class=\"navbar-brand titulo-principal\" href=\"http://localhost:6789\"><h1> Minerva </h1></a>\r\n"
-				+ "    		<button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n"
-				+ "      			<span class=\"navbar-toggler-icon\"></span>\r\n"
-				+ "    		</button>\r\n"
-				+ "    	</div>\r\n"
-				+ "    	</div>\r\n"
-				+ "    	<div class=\"col-6\">\r\n"
-				+ "    	</div>\r\n"
-				+ "		<div class=\"col-3\">\r\n"
-				+ "    		<div class=\"collapse navbar-collapse centralizar-div\" id=\"navbarNav\">\r\n"
-				+ "      			<ul class=\"navbar-nav ms-auto\">\r\n"
-				+ "        			<li class=\"nav-item\">\r\n"
-				+ "          				<a class=\"nav-link\" href=\"http://localhost:6789\">Home</a>\r\n"
-				+ "        			</li>\r\n"
-				+ "        			<li class=\"nav-item\">\r\n"
-				+ "          				<a class=\"nav-link\" href=\"#\">Sobre</a>\r\n"
-				+ "        			</li>\r\n"
-				+ "        			<li class=\"nav-item\">\r\n"
-				+ "          				<button type=\"button\" class=\"btn btn-outline-light\">Contatos</button>\r\n"
-				+ "        			</li>\r\n"
-				+ "      			</ul>\r\n"
-				+ "    		</div>\r\n"
-				+ "    	</div>\r\n"
-				+ "    </div>\r\n"
-				+ "    </div>\r\n"
-				+ "    </header>\r\n"
-				+ "\r\n"
-				+ "	<div class=\"secao_categorias\">\r\n"
+		html += this.renderHeader();
+		
+		html +=	 "	<div class=\"secao_categorias\">\r\n"
 				+ "		<div class=\"limite-site\">\r\n"
 				+ "			<h2 class=\"h-principal\" style=\"margin-top:100px;\">Categorias</h2>";
 		
@@ -343,5 +306,198 @@ public class Util {
 		
 		
 		return html;
+	}
+	
+	public String renderPerfilArtistaCompleto(String idArtista) throws NumberFormatException, SQLException {
+		ArtistaDao conexao = new ArtistaDao();
+		ArtistaModel artista = conexao.get(Integer.parseInt(idArtista));
+		List<ImagensArtistaModel> imagens = conexao.getImagensDoArtistaByIdArtista(Integer.parseInt(idArtista));
+		String caminhoFotoPerfil = conexao.getFotoPerfil(Integer.parseInt(idArtista));
+		
+		String paginaPerfil = this.renderHeader();
+		
+		paginaPerfil += "<div class=\"secao\">\r\n"
+				+ "		<div class=\"limite-site\">";
+		
+		paginaPerfil += "<div class=\"row\">\r\n"
+				+ "				<div class=\"col-3\"></div>\r\n"
+				+ "				<div class=\"col-6\">\r\n"
+				+ "					<div class=\"row\">\r\n"
+				+ "						<div class=\"col-6\">\r\n"
+				+ "							<div class=\"bloco_foto_perfil\">\r\n"
+				+ "								<div class=\"circulo_foto_perfil\">\r\n"
+				+ "									<div class=\"foto_perfil\">\r\n"
+				+ "										<img alt=\"\" class=\"img-fluid imagem_perfil\" src="+caminhoFotoPerfil+">\r\n"
+				+ "									</div>\r\n"
+				+ "								</div>\r\n"
+				+ "							</div>\r\n"
+				+ "						</div>\r\n"
+				+ "						<div class=\"col-6\">\r\n"
+				+ "							<div class=\"row bloco_nome_artista\" style=\"margin-bottom: 3px;\">\r\n"
+				+ "								<div class=\"col-12\"><h4>"+artista.getNomeArtista()+"</h4></div>\r\n"
+				+ "							</div>\r\n"
+				+ "							<div class=\"row bloco_categoria_artista\">\r\n"
+				+ "								<div class=\"col-4\"><div class=\"tag_cat\">"+artista.getNomeCategoria()+"</div></div>\r\n"
+				+ "								<div class=\"col-4\"></div>\r\n"
+				+ "								<div class=\"col-4\"></div>\r\n"
+				+ "							</div>\r\n"
+				+ "							<div class=\"row bloco_status_artista\">\r\n"
+				+ "								<div class=\"col-4\">70 posts</div>\r\n"
+				+ "								<div class=\"col-6\">100 seguidores</div>\r\n"
+				+ "								<div class=\"col-2\"></div>\r\n"
+				+ "							</div>\r\n"
+				+ "							<div class=\"row bloco_sobre_artista\">\r\n"
+				+ "								<div class=\"col-12\" style=\"text-align: justify;\">"+artista.getResumoDescricaoArtista()+"</div>\r\n"
+				+ "							</div>\r\n"
+				+ "							<div class=\"row bloco_contatos_artista\">\r\n"
+				+ "								<div class=\"col-12\">\r\n"
+				+ "									<a href=\"\" style=\"text-decoration: none;color: inherit;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-phone\" viewBox=\"0 0 16 16\"><path d=\"M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z\"/><path d=\"M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z\"/>\r\n"
+				+ "											</svg>"+artista.getNumeroArtista()+"</a>\r\n"
+				+ "								</div>\r\n"
+				+ "							</div>\r\n"
+				+ "							<div class=\"row bloco_cadastro_produto\">\r\n"
+				+ "								<div class=\"col-12\">\r\n"
+				+ "									\r\n"
+				+ "									<button type=\"button\" class=\"btn btn-outline-primary\" id =\"btn-abre-modal\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\"\">Cadastrar novo produto</button>\r\n"
+				+ "									<div class=\"modal fade\" id=\"staticBackdrop\"\r\n"
+				+ "										data-bs-backdrop=\"static\" data-bs-keyboard=\"true\" tabindex=\"-1\"\r\n"
+				+ "										aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n"
+				+ "										<div class=\"modal-dialog\">\r\n"
+				+ "											<div class=\"modal-content\">\r\n"
+				+ "												<div class=\"modal-header\">\r\n"
+				+ "													<h1 class=\"modal-title fs-5\" id=\"staticBackdropLabel\">Cadastre um novo produto</h1>\r\n"
+				+ "													<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\"\r\n"
+				+ "														aria-label=\"Close\"></button>\r\n"
+				+ "													</div>\r\n"
+				+ "													<form action=\"http://localhost:6789/cadastroProduto\" name=\"Formulario de cadastro de produto\" method=\"post\" enctype=\"multipart/form-data\">\r\n"
+				+ "													<div class=\"modal-body\">\r\n"
+				+ "														<div class=\"mb-3\">\r\n"
+				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"titulo_produto\">Título</label>\r\n"
+				+ "															<input type=\"text\" class=\"form-control\" id=\"titulo_produto\" name=\"titulo_produto\" aria-describedby=\"emailHelp\">\r\n"
+				+ "														</div>\r\n"
+				+ "														<div class=\"mb-3\">\r\n"
+				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"img_label_produto\">Imagem:</label>\r\n"
+				+ "															<label class = \"imagem_produto\" for=\"arquivo\">Enviar arquivo</label>\r\n"
+				+ "															<input type=\"file\" name=\"arquivo\" id=\"arquivo\">\r\n"
+				+ "														</div>\r\n"
+				+ "														<div class=\"mb-3\">\r\n"
+				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"descricao_produto\">Descrição:</label>\r\n"
+				+ "															<textarea class=\"form-control\" id=\"descricao_cliente\" name=\"descricao_produto\" rows=\"4\"></textarea>\r\n"
+				+ "														</div>\r\n"
+				+ "													</div>\r\n"
+				+ "													<div class=\"modal-footer\">\r\n"
+				+ "														<button type=\"submit\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\" style=\"margin-top: 10px;\">Submit</button>\r\n"
+				+ "													</div>\r\n"
+				+ "                                                 </form>\r\n"	
+				+ "											</div>\r\n"
+				+ "										</div>\r\n"
+				+ "									</div>		\r\n"
+				+ "								</div>\r\n"
+				+ "							</div>\r\n"
+				+ "						</div>\r\n"
+				+ "					</div>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"col-3\"></div>\r\n"
+				+ "			</div>";
+		
+		int auxiliar = 0;
+		for(ImagensArtistaModel i: imagens) {
+			if(auxiliar == 0) {
+				paginaPerfil += "<div class=\"galeria_fotos_perfil row\">\r\n";
+			}
+			
+			paginaPerfil += "				<div class=\"col-4\">\r\n"
+					+ "<a href=http://localhost:6789/produto/"+i.getIdImagem()+">"
+			+ "					<div class=\"bloco_imagens_artista\">\r\n"
+			+ "						<img src=" + i.getImagem() + " class=\"img-fluid bloco_imagens_artista\" alt=\"...\">\r\n"
+			+ "					</div>\r\n"
+			+ " 			</a>	"
+			+ "				</div>\r\n";
+			
+			if(auxiliar == 3) {
+				paginaPerfil += "			</div>";
+				auxiliar = 0;
+			}
+			auxiliar++;
+		}
+		
+		paginaPerfil += "</div>\r\n"
+				+ "	</div>"
+		+ "	</div>";
+		
+		paginaPerfil += this.renderFooter();
+		
+		return paginaPerfil;
+	}
+	
+	public String renderProdutoArtistaCompleto(String id) throws NumberFormatException, SQLException {
+		String paginaProduto = this.renderHeader();
+		ArtistaDao conexao = new ArtistaDao();
+		ProdutoArtistaDao conexaoProduto = new ProdutoArtistaDao();
+		ImagensArtistaModel produto = conexaoProduto.get(Integer.parseInt(id));
+		ArtistaModel artista = conexao.getInfoArtistaPaginaProduto(produto.getFkIdArtista());
+		
+		paginaProduto += "<section class=\"s-produtoArtista\">\r\n"
+				+ "      <div class=\"limite-site\">\r\n"
+				+ "		  <div class=\"row\">\r\n"
+				+ "			  <div class=\"img-produto col col-9\">\r\n"
+				+ "				  <img src="+produto.getImagem()+" width=\"830\">\r\n"
+				+ "			  </div>\r\n"
+				+ "			  <div class=\"produto-artista-content col col-3\">\r\n"
+				+ "			  	  <div class=\"row\">\r\n"
+				+ "			  	  	  <div class=\"col col-2\">\r\n"
+				+ "			  	  	  	  <div class=\"foto-artista-pA\">\r\n"
+				+ "				  	  	  	  <img src=\"..\\images\\eu.jpg\">\r\n"
+				+ "			  	  	  	  </div>\r\n"
+				+ "			  	  	  </div>\r\n"
+				+ "			  	  	  <div class=\"col col-10\">\r\n"
+				+ "					  	  <a class=\"nome-tag-produto\">"+artista.getNomeArtista()+"</a>\r\n"
+				+ "					  	  <div class=\"tag_categoria\">"+artista.getNomeCategoria()+"</div>\r\n"
+				+ "			  	  	  </div>\r\n"
+				+ "			  	  </div>\r\n"
+				+ "			  	  <div class=\"like_buttons\">\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-heart-fill\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path fill-rule=\"evenodd\" d=\"M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z\"/></svg>\r\n"
+				+ "						Curtir\r\n"
+				+ "					</button>\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-share\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path d=\"M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z\"/></svg>\r\n"
+				+ "						Compartilhar\r\n"
+				+ "					</button>\r\n"
+				+ "					<button style=\"margin: 7px;\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"><svg style=\"margin-bottom: 5px;\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-star-fill\" viewBox=\"0 0 16 16\">\r\n"
+				+ "  						<path d=\"M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z\"/></svg>\r\n"
+				+ "						Adicionar aos favoritos\r\n"
+				+ "					</button>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_texto_foto\">\r\n"
+				+ "					<div style=\"margin-top:4px;font-size:14px\">\r\n"
+				+ "						"+produto.getDescricaoProduto()+"\r\n"
+				+ "					</div>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_categorias\">\r\n"
+				+ "					<p style=\"font-weight: 400;\">Categorias do artista</p>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-primary btn-sm\">"+artista.getNomeCategoria()+"</button>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-primary btn-sm\">"+artista.getNomeSubcategoria()+"</button>\r\n"
+				+ "				</div>\r\n"
+				+ "				<div class=\"bloco_botao_contato\">\r\n"
+				+ "					<p style=\"font-weight: 400;\">Entre em contato com o artista via WPP</p>\r\n"
+				+ "					<button type=\"button\" class=\"btn btn-success\">Contato</button>\r\n"
+				+ "				</div>\r\n"
+				+ "			  </div>\r\n"
+				+ "		  </div>\r\n"
+				+ "      </div>\r\n"
+				+ "  </section>";
+		
+		paginaProduto += this.renderFooter();
+		
+		return paginaProduto;
+	}
+	
+	public String toMD5(String senha) throws NoSuchAlgorithmException {
+		MessageDigest m = MessageDigest.getInstance("MD5");
+		m.update(senha.getBytes(), 0, senha.length());
+		String md5 =  new BigInteger(1, m.digest()).toString(16);
+
+		return md5;
 	}
 }

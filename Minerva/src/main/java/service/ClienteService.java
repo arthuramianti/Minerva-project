@@ -1,5 +1,6 @@
 package service;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +76,12 @@ public class ClienteService {
 		return front;
 	}
 
-	public Object insertClient(Request request, Response response) {
+	public Object insertClient(Request request, Response response) throws NoSuchAlgorithmException {
 		String front = "";
 		
 			if(!request.queryParams("nome_cliente").isEmpty() && !request.queryParams("email_cliente").isEmpty() && !request.queryParams("senha_cliente").isEmpty()) {
 				ClienteModel cliente = new ClienteModel(request.queryParams("nome_cliente"),
-						Integer.parseInt(request.queryParams("idade_cliente")), request.queryParams("email_cliente") , request.queryParams("senha_cliente"),
+						Integer.parseInt(request.queryParams("idade_cliente")), request.queryParams("email_cliente") , util.toMD5(request.queryParams("senha_cliente")),
 						request.queryParams("numero_cliente"));
 				
 				response.status(201);
@@ -94,7 +95,7 @@ public class ClienteService {
 				response.status(404);
 			}
 			
-			String page = util.render("cadastroUsuario.html");
+			String page = util.render("cadastroUsuarioSemModal.html");
 			
 			page = page.replaceFirst("<form action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">", 
 					"<form style=\"display: none;\" action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">");

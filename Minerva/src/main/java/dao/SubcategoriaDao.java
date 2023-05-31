@@ -44,14 +44,14 @@ public class SubcategoriaDao extends Dao{
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT nome_subcategoria\r\n"
+			String sql = "SELECT nome_subcategoria, id_subcategoria\r\n"
 					+ "	FROM subcategorias\r\n"
 					+ "	JOIN categorias \r\n"
 					+ "	ON categorias.id_categoria = fk_id_categoria\r\n"
 					+ "	WHERE fk_id_categoria = "+ fkIdCategoria + ";";
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
-				SubcategoriaModel u = new SubcategoriaModel(rs.getString("nome_subcategoria"));
+				SubcategoriaModel u = new SubcategoriaModel(rs.getString("nome_subcategoria"), rs.getInt("id_subcategoria"));
 				subcategorias.add(u);
 			}
 			st.close();
