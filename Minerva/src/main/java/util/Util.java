@@ -312,6 +312,7 @@ public class Util {
 		ArtistaDao conexao = new ArtistaDao();
 		ArtistaModel artista = conexao.get(Integer.parseInt(idArtista));
 		List<ImagensArtistaModel> imagens = conexao.getImagensDoArtistaByIdArtista(Integer.parseInt(idArtista));
+		String caminhoFotoPerfil = conexao.getFotoPerfil(Integer.parseInt(idArtista));
 		
 		String paginaPerfil = this.renderHeader();
 		
@@ -326,7 +327,7 @@ public class Util {
 				+ "							<div class=\"bloco_foto_perfil\">\r\n"
 				+ "								<div class=\"circulo_foto_perfil\">\r\n"
 				+ "									<div class=\"foto_perfil\">\r\n"
-				+ "										<img alt=\"\" class=\"img-fluid imagem_perfil\" src=\"../images/eu.jpg\">\r\n"
+				+ "										<img alt=\"\" class=\"img-fluid imagem_perfil\" src="+caminhoFotoPerfil+">\r\n"
 				+ "									</div>\r\n"
 				+ "								</div>\r\n"
 				+ "							</div>\r\n"
@@ -377,7 +378,7 @@ public class Util {
 				+ "														<div class=\"mb-3\">\r\n"
 				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"img_label_produto\">Imagem:</label>\r\n"
 				+ "															<label class = \"imagem_produto\" for=\"arquivo\">Enviar arquivo</label>\r\n"
-				+ "															<input type=\"file\" name=\"arquivo\" id=\"imagem\">\r\n"
+				+ "															<input type=\"file\" name=\"arquivo\" id=\"arquivo\">\r\n"
 				+ "														</div>\r\n"
 				+ "														<div class=\"mb-3\">\r\n"
 				+ "															<label style=\"font-weight: 700;\" class=\"form-label\" for=\"descricao_produto\">Descrição:</label>\r\n"

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.ImagensArtistaModel;
+import model.ProdutoModel;
 
 public class ProdutoArtistaDao extends Dao{
 	public ProdutoArtistaDao() {
@@ -32,5 +33,22 @@ public class ProdutoArtistaDao extends Dao{
 		}
 		
 		return produto;
+	}
+	
+	public boolean insert(ProdutoModel produto) {
+		boolean status = false;
+		try {
+			Statement st = conexao.createStatement();
+			String sql = "INSERT INTO produtos_artista (fk_id_artista, path_imagem_produto, descricao_produto) " + "VALUES ('"
+					+ produto.getFkIdArtista() + "','" + produto.getPathImagemProduto() + "', '" + produto.getDescricaoProduto() + "');";
+			System.out.println(sql);
+			st.executeUpdate(sql);
+			st.close();
+			status = true;
+		} catch (SQLException u) {
+			throw new RuntimeException(u);
+		}
+		return status;
+		
 	}
 }

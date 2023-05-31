@@ -49,4 +49,9 @@ public class RenderService {
 		return retorno;
 	}
 	
+	public Object renderPaginaCadastroProduto(Request request, Response response) {
+		String retorno = util.render("cadastroProduto.html");
+		
+		return retorno;
+	}
 }

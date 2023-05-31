@@ -95,7 +95,7 @@ public class ClienteService {
 				response.status(404);
 			}
 			
-			String page = util.render("cadastroUsuario.html");
+			String page = util.render("cadastroUsuarioSemModal.html");
 			
 			page = page.replaceFirst("<form action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">", 
 					"<form style=\"display: none;\" action=\"http://localhost:6789/cadastroCliente\"  method=\"post\" name=\"Formulario de cadastro de Clientes\">");

@@ -74,6 +74,23 @@ public class ArtistaDao extends Dao {
 		return imagens;
 	}
 	
+	public String getFotoPerfil(int fkIdArtista) {
+		String imagePath = null;
+		try {
+			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			String sql = "SELECT path_foto FROM foto_perfil_artista WHERE fk_id_artista=" + fkIdArtista + ";";
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				imagePath = rs.getString("path_foto");
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		return imagePath;
+	}
+	
 	public String getImagePathArtista(int fkIdImagem) {
 		String imagePath = null;
 		try {

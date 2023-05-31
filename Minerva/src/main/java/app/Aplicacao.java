@@ -46,7 +46,6 @@ public class Aplicacao {
 		post("/cadastrarArtista", (request, response) -> artistaService.insertArtista(request, response));
 		get("/artista/:id", (request, response) -> renderService.renderPerfilArtista(request, response));
 		get("/produto/:id", (request, response) -> renderService.renderProdutoArtista(request, response));
-		//post("/cadastrarArtista", (request, response) -> artistaService.cadastroArtista(request, response));
 		
 		//Categoria
 		get("/categorias/:id", (request, response) -> categoriaService.renderCategoriaEspecifica(request, response));
@@ -57,7 +56,7 @@ public class Aplicacao {
 		
 		//Produtos
 		post("/cadastroProduto", (request, response) -> artistaService.insertProduto(request, response));
-		
+		get("/cadastrarProduto/:id", (request, response) -> renderService.renderPaginaCadastroProduto(request, response));
 		
 		/*Spark.post("/cadastroProduto", "multipart/form-data", (request, response) -> {
 			String imageName = request.queryParams("arquivo");
